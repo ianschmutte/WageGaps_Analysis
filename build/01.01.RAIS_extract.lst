@@ -1,0 +1,88 @@
+                                                     The SAS System                   18:40 Monday, January 16, 2023   1
+
+                                                 The CONTENTS Procedure
+
+     Data Set Name        INTERWRK.SELECTED_WORKERS                                Observations          105338325
+     Member Type          DATA                                                     Variables             4        
+     Engine               V9                                                       Indexes               0        
+     Created              01/16/2023 18:40:33                                      Observation Length    40       
+     Last Modified        01/16/2023 18:40:33                                      Deleted Observations  0        
+     Protection                                                                    Compressed            NO       
+     Data Set Type                                                                 Sorted                YES      
+     Label                                                                                                        
+     Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                                   
+     Encoding             latin1  Western (ISO)                                                                   
+
+
+                                           Engine/Host Dependent Information
+
+           Data Set Page Size          65536                                                                 
+           Number of Data Set Pages    64546                                                                 
+           First Data Page             1                                                                     
+           Max Obs per Page            1632                                                                  
+           Obs in First Data Page      1571                                                                  
+           Number of Data Set Repairs  0                                                                     
+           Filename                    /work/imslab/WageGaps_Analysis/data/interwrk/selected_workers.sas7bdat
+           Release Created             9.0401M0                                                              
+           Host Created                Linux                                                                 
+           Inode Number                1.441203E17                                                           
+           Access Permission           rw-rw----                                                             
+           Owner Name                  schmutte                                                              
+           File Size (bytes)           4230152192                                                            
+
+
+                                      Alphabetic List of Variables and Attributes
+ 
+          #    Variable              Type    Len    Informat    Label
+
+          1    PIS                   Char     11    $11.        Worker PIS code                              
+          4    age_31Dec2003_mode    Num       8                Modal age on Dec.31 across all jobs          
+          3    male_mode             Num       8                Modal value of male indicator across all jobs
+          2    race_mode             Num       8                Modal race across all jobs                   
+
+
+                                                    Sort Information
+
+                                                  Sortedby       PIS  
+                                                  Validated      YES  
+                                                  Character Set  ASCII
+                                                     The SAS System                   18:40 Monday, January 16, 2023   2
+
+                                                 The CONTENTS Procedure
+
+         Data Set Name        DBOUT.RAIS_DATA_EXTRACT                                  Observations          0 
+         Member Type          DATA                                                     Variables             3 
+         Engine               V9                                                       Indexes               0 
+         Created              01/16/2023 18:40:40                                      Observation Length    24
+         Last Modified        01/16/2023 18:40:40                                      Deleted Observations  0 
+         Protection                                                                    Compressed            NO
+         Data Set Type                                                                 Sorted                NO
+         Label                                                                                                 
+         Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                            
+         Encoding             latin1  Western (ISO)                                                            
+
+
+                                           Engine/Host Dependent Information
+
+             Data Set Page Size          65536                                                             
+             Number of Data Set Pages    1                                                                 
+             First Data Page             1                                                                 
+             Max Obs per Page            2714                                                              
+             Obs in First Data Page      0                                                                 
+             Number of Data Set Repairs  0                                                                 
+             Filename                    /work/imslab/WageGaps_Analysis/data/out/rais_data_extract.sas7bdat
+             Release Created             9.0401M0                                                          
+             Host Created                Linux                                                             
+             Inode Number                1.441203E17                                                       
+             Access Permission           rw-rw----                                                         
+             Owner Name                  schmutte                                                          
+             File Size (bytes)           131072                                                            
+
+
+                                       Alphabetic List of Variables and Attributes
+ 
+     #    Variable     Type    Len    Format    Informat    Label
+
+     1    PIS          Char     11              $11.        Worker PIS code                                        
+     3    educ_best    Num       8                          Maximum education observed for this PIS up to this year
+     2    year         Char      4    $4.                   sample year                                            

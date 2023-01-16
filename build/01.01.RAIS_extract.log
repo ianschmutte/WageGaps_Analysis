@@ -1,0 +1,911 @@
+1                                                          The SAS System                             18:40 Monday, January 16, 2023
+
+NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
+NOTE: SAS (r) Proprietary Software 9.4 (TS1M0) 
+      Licensed to BD OF REGENTS OF UNIV SYST OF GEORGIA - SFA T&R, Site 70075287.
+NOTE: This session is executing on the Linux 3.10.0-1160.36.2.el7.x86_64 (LIN X64) platform.
+
+
+
+NOTE: Updated analytical products:
+      
+      SAS/STAT 12.3 (maintenance)
+      SAS/ETS 12.3 (maintenance)
+      SAS/OR 12.3 (maintenance)
+      SAS/IML 12.3 (maintenance)
+      SAS/QC 12.3 (maintenance)
+
+NOTE: Additional host information:
+
+ Linux LIN X64 3.10.0-1160.36.2.el7.x86_64 #1 SMP Wed Jul 21 11:57:15 UTC 2021 x86_64 CentOS Linux release 7.9.2009 (Core) 
+
+You are running SAS 9. Some SAS 8 files will be automatically converted 
+by the V9 engine; others are incompatible.  Please see 
+http://support.sas.com/rnd/migration/planning/platform/64bit.html
+
+PROC MIGRATE will preserve current SAS file attributes and is 
+recommended for converting all your SAS libraries from any 
+SAS 8 release to SAS 9.  For details and examples, please see
+http://support.sas.com/rnd/migration/index.html
+
+
+This message is contained in the SAS news file, and is presented upon
+initialization.  Edit the file "news" in the "misc/base" directory to
+display site-specific news and information in the program log.
+The command line option "-nonews" will prevent this display.
+
+
+
+
+NOTE: SAS initialization used:
+      real time           0.29 seconds
+      cpu time            0.02 seconds
+      
+1          /*****************************************************************************
+2          RAIS_extract
+3          Ian M. Schmutte
+4          2022-10-19
+5          
+6          Extract data for estimating wage gaps
+7          
+8          *****************************************************************************/
+9          /*librefs, options, etc*/
+10           %INCLUDE "./lib/header.sas";
+WARNING: Apparent symbolic reference IDX_PATH not resolved.
+WARNING: One or more libraries specified in the concatenated library IRAIS do not exist.  These libraries were removed from the 
+         concatenation.
+NOTE: Libref IRAIS was successfully assigned as follows: 
+      Levels:           1
+      Engine(1):        V9 
+      Physical Name(1): /work/imslab/WageGaps_Analysis/data/IRAIS-research
+2                                                          The SAS System                             18:40 Monday, January 16, 2023
+
+NOTE: Library EXTERNAL does not exist.
+NOTE: Libref INTERWRK was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /work/imslab/WageGaps_Analysis/data/interwrk
+NOTE: Libref DBOUT was successfully assigned as follows: 
+      Engine:        V9 
+      Physical Name: /work/imslab/WageGaps_Analysis/data/out
+40         
+41         /*Load macros to validate worker and plant ids*/
+42           %INCLUDE "./lib/br_id_validation_macros.sas";
+132        
+133        /*Load formats for industries, occupations, etc.*/
+134          %INCLUDE "./lib/br_formats.sas";
+NOTE: Format $INDMJR has been output.
+NOTE: Format $INDMJR_NAME has been output.
+NOTE: Format EDUC_NAME has been output.
+NOTE: Format OCCSM_NAME has been output.
+NOTE: Format $REG has been output.
+
+NOTE: PROCEDURE FORMAT used (Total process time):
+      real time           0.02 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              204.40k
+      OS Memory           4760.00k
+      Timestamp           01/16/2023 06:40:23 PM
+      Step Count                        1  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     112
+      Page Swaps                        0
+      Voluntary Context Switches        12
+      Involuntary Context Switches      1
+      Block Input Operations            72
+      Block Output Operations           64
+      
+
+227        
+228        /*****************************************************************************/
+229        
+230        /*create view with all years of data stacked together.*/
+231        %macro stackup;
+232        data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
+233          set
+234          %DO yr=2003 %TO 2017;
+235            IRAIS.rais_match_uniq_&yr.
+236          %END;
+237          ;
+238        run;
+239        
+240        data FASTWRK2.irais_plantstack / view=FASTWRK2.irais_plantstack;
+241          set
+242          %DO yr=2003 %TO 2017;
+243            IRAIS.rais_plant_uniq_&yr.
+244          %END;
+245          ;
+246        run;
+247        %mend;
+248        
+3                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+249        %stackup;
+MPRINT(STACKUP):   data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
+SYMBOLGEN:  Macro variable YR resolves to 2003
+SYMBOLGEN:  Macro variable YR resolves to 2004
+SYMBOLGEN:  Macro variable YR resolves to 2005
+SYMBOLGEN:  Macro variable YR resolves to 2006
+SYMBOLGEN:  Macro variable YR resolves to 2007
+SYMBOLGEN:  Macro variable YR resolves to 2008
+SYMBOLGEN:  Macro variable YR resolves to 2009
+SYMBOLGEN:  Macro variable YR resolves to 2010
+SYMBOLGEN:  Macro variable YR resolves to 2011
+SYMBOLGEN:  Macro variable YR resolves to 2012
+SYMBOLGEN:  Macro variable YR resolves to 2013
+SYMBOLGEN:  Macro variable YR resolves to 2014
+SYMBOLGEN:  Macro variable YR resolves to 2015
+SYMBOLGEN:  Macro variable YR resolves to 2016
+SYMBOLGEN:  Macro variable YR resolves to 2017
+MPRINT(STACKUP):   set IRAIS.rais_match_uniq_2003 IRAIS.rais_match_uniq_2004 IRAIS.rais_match_uniq_2005 
+IRAIS.rais_match_uniq_2006 IRAIS.rais_match_uniq_2007 IRAIS.rais_match_uniq_2008 IRAIS.rais_match_uniq_2009 
+IRAIS.rais_match_uniq_2010 IRAIS.rais_match_uniq_2011 IRAIS.rais_match_uniq_2012 IRAIS.rais_match_uniq_2013 
+IRAIS.rais_match_uniq_2014 IRAIS.rais_match_uniq_2015 IRAIS.rais_match_uniq_2016 IRAIS.rais_match_uniq_2017 ;
+MPRINT(STACKUP):   run;
+
+ERROR: Libref FASTWRK2 is not assigned.
+ERROR: Unable to save DATA STEP view FASTWRK2.IRAIS_JOBSTACK.
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: DATA statement used (Total process time):
+      real time           0.75 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.02 seconds
+      memory              2625.18k
+      OS Memory           9368.00k
+      Timestamp           01/16/2023 06:40:24 PM
+      Step Count                        2  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     764
+      Page Swaps                        0
+      Voluntary Context Switches        134
+      Involuntary Context Switches      0
+      Block Input Operations            2056
+      Block Output Operations           0
+      
+
+
+MPRINT(STACKUP):   data FASTWRK2.irais_plantstack / view=FASTWRK2.irais_plantstack;
+SYMBOLGEN:  Macro variable YR resolves to 2003
+SYMBOLGEN:  Macro variable YR resolves to 2004
+SYMBOLGEN:  Macro variable YR resolves to 2005
+SYMBOLGEN:  Macro variable YR resolves to 2006
+SYMBOLGEN:  Macro variable YR resolves to 2007
+SYMBOLGEN:  Macro variable YR resolves to 2008
+SYMBOLGEN:  Macro variable YR resolves to 2009
+SYMBOLGEN:  Macro variable YR resolves to 2010
+SYMBOLGEN:  Macro variable YR resolves to 2011
+SYMBOLGEN:  Macro variable YR resolves to 2012
+SYMBOLGEN:  Macro variable YR resolves to 2013
+SYMBOLGEN:  Macro variable YR resolves to 2014
+SYMBOLGEN:  Macro variable YR resolves to 2015
+4                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+SYMBOLGEN:  Macro variable YR resolves to 2016
+SYMBOLGEN:  Macro variable YR resolves to 2017
+MPRINT(STACKUP):   set IRAIS.rais_plant_uniq_2003 IRAIS.rais_plant_uniq_2004 IRAIS.rais_plant_uniq_2005 
+IRAIS.rais_plant_uniq_2006 IRAIS.rais_plant_uniq_2007 IRAIS.rais_plant_uniq_2008 IRAIS.rais_plant_uniq_2009 
+IRAIS.rais_plant_uniq_2010 IRAIS.rais_plant_uniq_2011 IRAIS.rais_plant_uniq_2012 IRAIS.rais_plant_uniq_2013 
+IRAIS.rais_plant_uniq_2014 IRAIS.rais_plant_uniq_2015 IRAIS.rais_plant_uniq_2016 IRAIS.rais_plant_uniq_2017 ;
+MPRINT(STACKUP):   run;
+
+ERROR: Libref FASTWRK2 is not assigned.
+ERROR: Unable to save DATA STEP view FASTWRK2.IRAIS_PLANTSTACK.
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: DATA statement used (Total process time):
+      real time           0.34 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.01 seconds
+      memory              2311.75k
+      OS Memory           9368.00k
+      Timestamp           01/16/2023 06:40:24 PM
+      Step Count                        3  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     223
+      Page Swaps                        0
+      Voluntary Context Switches        105
+      Involuntary Context Switches      0
+      Block Input Operations            2040
+      Block Output Operations           0
+      
+
+250        
+251        /*SELECT WORKERS*/
+252        %macro selectworkers;
+253        data INTERWRK.selected_workers;
+254          set IRAIS.race_gender_age_best;
+255        run;
+256        
+257        proc sort data = INTERWRK.selected_workers;
+258          by PIS;
+259        run;
+260        
+261        proc contents data = INTERWRK.selected_workers;
+262        run;
+263        
+264        %mend;
+265        %selectworkers;
+MPRINT(SELECTWORKERS):   data INTERWRK.selected_workers;
+MPRINT(SELECTWORKERS):   set IRAIS.race_gender_age_best;
+MPRINT(SELECTWORKERS):   run;
+
+NOTE: There were 105338325 observations read from the data set IRAIS.RACE_GENDER_AGE_BEST.
+NOTE: The data set INTERWRK.SELECTED_WORKERS has 105338325 observations and 4 variables.
+NOTE: DATA statement used (Total process time):
+      real time           8.76 seconds
+      user cpu time       3.24 seconds
+      system cpu time     3.21 seconds
+      memory              756.53k
+      OS Memory           7320.00k
+      Timestamp           01/16/2023 06:40:33 PM
+      Step Count                        4  Switch Count  0
+5                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+      Page Faults                       0
+      Page Reclaims                     223
+      Page Swaps                        0
+      Voluntary Context Switches        130
+      Involuntary Context Switches      13
+      Block Input Operations            8262072
+      Block Output Operations           8262032
+      
+
+MPRINT(SELECTWORKERS):   proc sort data = INTERWRK.selected_workers;
+MPRINT(SELECTWORKERS):   by PIS;
+MPRINT(SELECTWORKERS):   run;
+
+NOTE: There were 105338325 observations read from the data set INTERWRK.SELECTED_WORKERS.
+NOTE: The data set INTERWRK.SELECTED_WORKERS has 105338325 observations and 4 variables.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           6.99 seconds
+      user cpu time       16.65 seconds
+      system cpu time     4.37 seconds
+      memory              9096971.14k
+      OS Memory           9104920.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        5  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     1812086
+      Page Swaps                        0
+      Voluntary Context Switches        15721
+      Involuntary Context Switches      5859
+      Block Input Operations            2097032
+      Block Output Operations           8262032
+      
+
+MPRINT(SELECTWORKERS):   proc contents data = INTERWRK.selected_workers;
+MPRINT(SELECTWORKERS):   run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.12 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.01 seconds
+      memory              2139.37k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        6  Switch Count  1
+      Page Faults                       0
+      Page Reclaims                     657
+      Page Swaps                        0
+      Voluntary Context Switches        124
+      Involuntary Context Switches      1
+      Block Input Operations            4536
+      Block Output Operations           8
+      
+NOTE: The PROCEDURE CONTENTS printed page 1.
+
+266        
+267        
+268        %macro selectjobs;
+269        
+270        %let inlist = PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE
+6                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+271                                             EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED
+272                                             TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS
+273                                             RACE GENDER;
+274        
+275        data FASTWRK1.select_jobs(keep= PIS year PLANT_ID
+276        								CNAE20_CLASS MUNI ESTAB_SIZE_DEC31
+277                                        age_31Dec race_mode male_mode
+278                                        RACE GENDER male
+279                                        race_white race_pardo race_preto race_other
+280                                        EARN_AVG_MONTH_REAL EARN_DEC_REAL
+281                                        NUM_HOURS_CONTRACTED
+282                                        TYPE_OF_HIRE
+283                                        HIRE_DATE CAUSE_OF_SEP MONTH_OF_SEP DAY_OF_SEP
+284                                        OCCUP_CBO2002 TENURE_MONTHS
+285                                        CONTRACT_TYPE
+286                              				 );
+287        	array cpi{2003:2017} _temporary_;
+288        	b=0;
+289        	if _n_=1 then do;
+290        		do until (b=1);
+291        			set EXTERNAL.brazil_cpi_vector;
+292        			array cpi_temp{2003:2017} cpi2003--cpi2017;
+293        			do yr = 2003 to 2017;
+294        				cpi{yr} = cpi_temp{yr};
+295        			end;
+296        			b=1;
+297        		end;
+298        		if 0 then set INTERWRK.selected_workers
+299        					  fastwrk2.irais_plantstack;
+300                 	
+301                 	declare hash pltchars(dataset: 'fastwrk2.irais_plantstack',
+302                 							ordered: 'no');
+303                 	pltchars.definekey ("plant_id", "year");
+304                 	pltchars.definedata("CNAE20_CLASS","MUNI","ESTAB_SIZE_DEC31","ESTAB_TYPE");
+305                 	pltchars.definedone();
+306        
+307                 	declare hash wrkchars(dataset: 'INTERWRK.selected_workers',
+308                 							ordered: 'ascending');
+309                 	wrkchars.definekey ("PIS");
+310                 	wrkchars.definedata("age_31Dec2003_mode","race_mode","male_mode");
+311                 	wrkchars.definedone();   		
+312        	end;
+313        	set
+314              %DO yr=2003 %TO 2010;
+315                IRAIS.rais_match_uniq_&yr.(keep=&inlist.  DAY_OF_SEP)
+316              %END;
+317              %DO yr=2012 %TO 2013;
+318                IRAIS.rais_match_uniq_&yr.(keep=&inlist.)
+319              %END;
+320              %DO yr=2014 %TO 2017;
+321                IRAIS.rais_match_uniq_&yr.(keep=&inlist.  DAY_OF_SEP)
+322              %END;
+323            ;
+324          rc1 = wrkchars.find();
+325          /* only keep processing if worker was found */
+326        	if rc1 = 0 then do;
+327                rc2 = pltchars.find();
+328                /*only keep processing if plant was found*/
+7                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+329                region = substr(muni,1,1);
+330                state = substr(muni,1,2);
+331                /* if rc2 = 0 and (state = "43") then do; */
+332                if rc2 = 0 then do;
+333        
+334                    age_31Dec = input(year,4.)-2003 + age_31Dec2003_mode;
+335        
+336                    /*MAKE EARNINGS REAL (2015 REAIS)*/
+337                    EARN_AVG_MONTH_REAL = EARN_AVG_MONTH_NOM/cpi{input(year,4.)};
+338                    EARN_DEC_REAL = EARN_DEC_NOM/cpi{input(year,4.)};
+339        
+340        
+341                    male = GENDER = "M";
+342                    race_white = RACE = "02";
+343                    race_pardo = RACE = "08";
+344                    race_preto = RACE = "04";
+345                    race_other = race_white + race_pardo + race_preto = 0;
+346        
+347        
+348                    label EARN_AVG_MONTH_REAL = 'Inflation Adjusted Monthly Earnings - 2015 Reais'
+349                        EARN_DEC_REAL = 'Inflation Adjusted December Earnings - 2015 Reais'
+350                        age_31Dec = 'Age on Dec. 31 based on modal date of birth reported for this PIS'
+351                        male = "Employer reported gender is male"
+352                        race_white = "Employer reported race is white"
+353                        race_pardo = "Employer reported race is pardo"
+354                        race_preto = "Employer reported race is preto"
+355                        race_other = "Employer reported some other race or race missing"
+356                        ;
+357        
+358                    /*Select observations with valid identifiers/key variables. Note we impose plant size >0 workers
+358      ! (stock)*/
+359                    /*validate PIS and PLANT_ID*/
+360                    %validate_pis(PIS);
+361                    %validate_cnpj(PLANT_ID);
+362                    if (PIS_valid = 1
+363                    and PLANT_ID_valid = 1
+364                        and input(ESTAB_SIZE_DEC31,2.) > 0
+365                        and CONTRACT_TYPE  not in ("30","31","35","50")
+366                        )
+367                    then output;
+368                end;
+369            end;
+370        run;
+371        
+372        %MEND;
+373        %selectjobs;
+ERROR: Libref FASTWRK1 is not assigned.
+MPRINT(SELECTJOBS):   data FASTWRK1.select_jobs(keep= PIS year PLANT_ID CNAE20_CLASS MUNI ESTAB_SIZE_DEC31 age_31Dec 
+race_mode male_mode RACE GENDER male race_white race_pardo race_preto race_other EARN_AVG_MONTH_REAL EARN_DEC_REAL 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE HIRE_DATE CAUSE_OF_SEP MONTH_OF_SEP DAY_OF_SEP OCCUP_CBO2002 TENURE_MONTHS 
+CONTRACT_TYPE );
+MPRINT(SELECTJOBS):   array cpi{2003:2017} _temporary_;
+MPRINT(SELECTJOBS):   b=0;
+MPRINT(SELECTJOBS):   if _n_=1 then do;
+MPRINT(SELECTJOBS):   do until (b=1);
+MPRINT(SELECTJOBS):   set EXTERNAL.brazil_cpi_vector;
+ERROR: File EXTERNAL.BRAZIL_CPI_VECTOR.DATA does not exist.
+MPRINT(SELECTJOBS):   array cpi_temp{2003:2017} cpi2003--cpi2017;
+8                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+ERROR: Variable cpi2003 cannot be found on the list of previously defined variables.
+ERROR: Too few variables defined for the dimension(s) specified for the array cpi_temp.
+MPRINT(SELECTJOBS):   do yr = 2003 to 2017;
+MPRINT(SELECTJOBS):   cpi{yr} = cpi_temp{yr};
+MPRINT(SELECTJOBS):   end;
+MPRINT(SELECTJOBS):   b=1;
+MPRINT(SELECTJOBS):   end;
+MPRINT(SELECTJOBS):   if 0 then set INTERWRK.selected_workers fastwrk2.irais_plantstack;
+ERROR: Libref FASTWRK2 is not assigned.
+ERROR: DATA STEP Component Object failure.  Aborted during the COMPILATION phase.
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: DATA statement used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.01 seconds
+      system cpu time     0.00 seconds
+      memory              302.15k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        7  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     68
+      Page Swaps                        0
+      Voluntary Context Switches        11
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+MPRINT(SELECTJOBS):   declare hash pltchars(dataset: 'fastwrk2.irais_plantstack', ordered: 'no');
+MPRINT(SELECTJOBS):   pltchars.definekey ("plant_id", "year");
+MPRINT(SELECTJOBS):   pltchars.definedata("CNAE20_CLASS","MUNI","ESTAB_SIZE_DEC31","ESTAB_TYPE");
+MPRINT(SELECTJOBS):   pltchars.definedone();
+MPRINT(SELECTJOBS):   declare hash wrkchars(dataset: 'INTERWRK.selected_workers', ordered: 'ascending');
+MPRINT(SELECTJOBS):   wrkchars.definekey ("PIS");
+MPRINT(SELECTJOBS):   wrkchars.definedata("age_31Dec2003_mode","race_mode","male_mode");
+MPRINT(SELECTJOBS):   wrkchars.definedone();
+MPRINT(SELECTJOBS):   end;
+SYMBOLGEN:  Macro variable YR resolves to 2003
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2004
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2005
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2006
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2007
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2008
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+9                                                    The SAS System                       18:40 Monday, January 16, 2023
+
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2009
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2010
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2012
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2013
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2014
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2015
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2016
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+SYMBOLGEN:  Macro variable YR resolves to 2017
+SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
+                 EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
+            CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+MPRINT(SELECTJOBS):   set IRAIS.rais_match_uniq_2003(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM 
+EARN_DEC_NOM NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER 
+DAY_OF_SEP) IRAIS.rais_match_uniq_2004(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2005(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2006(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2007(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2008(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2009(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2010(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2012(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER) 
+IRAIS.rais_match_uniq_2013(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER) 
+IRAIS.rais_match_uniq_2014(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2015(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+10                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+IRAIS.rais_match_uniq_2016(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
+IRAIS.rais_match_uniq_2017(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
+NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) ;
+MPRINT(SELECTJOBS):   rc1 = wrkchars.find();
+MPRINT(SELECTJOBS):   if rc1 = 0 then do;
+MPRINT(SELECTJOBS):   rc2 = pltchars.find();
+MPRINT(SELECTJOBS):   region = substr(muni,1,1);
+MPRINT(SELECTJOBS):   state = substr(muni,1,2);
+MPRINT(SELECTJOBS):   if rc2 = 0 then do;
+MPRINT(SELECTJOBS):   age_31Dec = input(year,4.)-2003 + age_31Dec2003_mode;
+MPRINT(SELECTJOBS):   EARN_AVG_MONTH_REAL = EARN_AVG_MONTH_NOM/cpi{input(year,4.)};
+MPRINT(SELECTJOBS):   EARN_DEC_REAL = EARN_DEC_NOM/cpi{input(year,4.)};
+MPRINT(SELECTJOBS):   male = GENDER = "M";
+MPRINT(SELECTJOBS):   race_white = RACE = "02";
+MPRINT(SELECTJOBS):   race_pardo = RACE = "08";
+MPRINT(SELECTJOBS):   race_preto = RACE = "04";
+MPRINT(SELECTJOBS):   race_other = race_white + race_pardo + race_preto = 0;
+MPRINT(SELECTJOBS):   label EARN_AVG_MONTH_REAL = 'Inflation Adjusted Monthly Earnings - 2015 Reais' EARN_DEC_REAL = 
+'Inflation Adjusted December Earnings - 2015 Reais' age_31Dec = 'Age on Dec. 31 based on modal date of birth reported 
+for this PIS' male = "Employer reported gender is male" race_white = "Employer reported race is white" race_pardo = 
+"Employer reported race is pardo" race_preto = "Employer reported race is preto" race_other = "Employer reported some 
+other race or race missing" ;
+MPRINT(VALIDATE_PIS):   array list_pis{10} _temporary_ (3 2 9 8 7 6 5 4 3 2);
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   PIS_valid = 0;
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   PIS = trim(left(PIS));
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   if length(PIS) = 11 and PIS ne "00000000000" then do;
+MPRINT(VALIDATE_PIS):   sum = 0;
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   cd1 = input(substr(PIS,11,1),1.);
+MPRINT(VALIDATE_PIS):   do pos = 1 to 10;
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   sum = sum + list_pis{pos}*input(substr(PIS,pos,1),1.);
+MPRINT(VALIDATE_PIS):   end;
+SYMBOLGEN:  Macro variable PIS resolves to PIS
+MPRINT(VALIDATE_PIS):   if (mod(sum,11) in (0,1) and cd1 = 0) or (11 - mod(sum,11) = cd1) then PIS_valid=1;
+MPRINT(VALIDATE_PIS):   end;
+MPRINT(SELECTJOBS):  ;
+MPRINT(VALIDATE_CNPJ):   array list_cnpj{13} _temporary_ (6 5 4 3 2 9 8 7 6 5 4 3 2);
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   PLANT_ID_valid = 0;
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   PLANT_ID = trim(left(PLANT_ID));
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   if length(PLANT_ID) = 14 and PLANT_ID ne "00000000000000" then do;
+MPRINT(VALIDATE_CNPJ):   sum = 0;
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   cd1 = input(substr(PLANT_ID,13,1),1.);
+MPRINT(VALIDATE_CNPJ):   do pos = 2 to 13;
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   sum = sum + list_cnpj{pos}*input(substr(PLANT_ID,pos-1,1),1.);
+11                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+MPRINT(VALIDATE_CNPJ):   end;
+MPRINT(VALIDATE_CNPJ):   if (mod(sum,11) in (0,1) and cd1 = 0) or (11 - mod(sum,11) = cd1) then do;
+MPRINT(VALIDATE_CNPJ):   sum = 0;
+MPRINT(VALIDATE_CNPJ):   do pos = 1 to 13;
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   sum = sum + list_cnpj{pos}*input(substr(PLANT_ID,pos,1),1.);
+MPRINT(VALIDATE_CNPJ):   end;
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   cd2 = input(substr(PLANT_ID,14,1),1.);
+SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
+MPRINT(VALIDATE_CNPJ):   if (mod(sum,11) in (0,1) and cd2 = 0) or (11 - mod(sum,11) = cd2) then PLANT_ID_valid = 1;
+MPRINT(VALIDATE_CNPJ):   end;
+MPRINT(VALIDATE_CNPJ):   end;
+MPRINT(SELECTJOBS):  ;
+MPRINT(SELECTJOBS):   if (PIS_valid = 1 and PLANT_ID_valid = 1 and input(ESTAB_SIZE_DEC31,2.) > 0 and CONTRACT_TYPE not 
+in ("30","31","35","50") ) then output;
+MPRINT(SELECTJOBS):   end;
+MPRINT(SELECTJOBS):   end;
+MPRINT(SELECTJOBS):   run;
+374        
+
+
+375        proc contents data = FASTWRK1.select_jobs;
+ERROR: Libref FASTWRK1 is not assigned.
+376        run;
+
+NOTE: Statements not processed because of errors noted above.
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              194.00k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        8  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     2
+      Page Swaps                        0
+      Voluntary Context Switches        0
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           8
+      
+NOTE: The SAS System stopped processing this step because of errors.
+377        
+
+
+378        proc print data = FASTWRK1.select_jobs (obs=20);
+ERROR: Libref FASTWRK1 is not assigned.
+379        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE PRINT used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              66.56k
+      OS Memory           8344.00k
+12                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        9  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     37
+      Page Swaps                        0
+      Voluntary Context Switches        6
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+380        
+
+
+381        proc freq data = FASTWRK1.select_jobs;
+ERROR: Libref FASTWRK1 is not assigned.
+382          tables PIS_valid PLANT_ID_valid ESTAB_SIZE_DEC31;
+ERROR: No data set open to look up variables.
+ERROR: No data set open to look up variables.
+ERROR: No data set open to look up variables.
+383        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE FREQ used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              31.43k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        10  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     20
+      Page Swaps                        0
+      Voluntary Context Switches        0
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+384        
+
+
+385        proc means data = FASTWRK1.select_jobs;
+ERROR: Libref FASTWRK1 is not assigned.
+386          var age_31Dec TENURE_MONTHS NUM_HOURS_CONTRACTED;
+ERROR: No data set open to look up variables.
+ERROR: No data set open to look up variables.
+ERROR: No data set open to look up variables.
+387        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              76.18k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        11  Switch Count  0
+13                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+      Page Faults                       0
+      Page Reclaims                     36
+      Page Swaps                        0
+      Voluntary Context Switches        3
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+388        
+
+
+389        proc univariate data= FASTWRK1.select_jobs;
+ERROR: Libref FASTWRK1 is not assigned.
+390          var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
+391        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              60.56k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        12  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     27
+      Page Swaps                        0
+      Voluntary Context Switches        0
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+392        
+
+
+393        proc sort data = FASTWRK1.select_jobs;
+ERROR: Libref FASTWRK1 is not assigned.
+394          by PIS year;
+395        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: SAS set option OBS=0 and will continue to check statements. This might cause NOTE: No observations in data set.
+NOTE: PROCEDURE SORT used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              23.03k
+      OS Memory           8344.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        13  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     1
+      Page Swaps                        0
+      Voluntary Context Switches        0
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+14                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+      
+396        
+397        /*assign dominant jobs and attach education*/
+
+
+398        data DBOUT.RAIS_data_extract;
+399          merge FASTWRK1.select_jobs(in = left)
+400                IRAIS.educ_best(keep = pis year educ_best in = right);
+ERROR: Libref FASTWRK1 is not assigned.
+401          by PIS year;
+402          if left;
+403        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+WARNING: The data set DBOUT.RAIS_DATA_EXTRACT may be incomplete.  When this step was stopped there were 0 observations 
+         and 3 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.04 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              399.43k
+      OS Memory           8600.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        14  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     15
+      Page Swaps                        0
+      Voluntary Context Switches        26
+      Involuntary Context Switches      0
+      Block Input Operations            136
+      Block Output Operations           136
+      
+
+404        
+405        proc contents data = DBOUT.RAIS_data_extract;
+406        run;
+
+NOTE: PROCEDURE CONTENTS used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              499.84k
+      OS Memory           8600.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        15  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     16
+      Page Swaps                        0
+      Voluntary Context Switches        5
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           8
+      
+NOTE: The PROCEDURE CONTENTS printed page 2.
+
+407        
+408        proc UNIVARIATE data = DBOUT.RAIS_data_extract;
+409          var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
+15                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+ERROR: Variable EARN_AVG_MONTH_REAL not found.
+ERROR: Variable EARN_DEC_REAL not found.
+410        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              194.00k
+      OS Memory           8600.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        16  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     7
+      Page Swaps                        0
+      Voluntary Context Switches        3
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+411        
+
+
+412        proc means data = DBOUT.RAIS_data_extract;
+413          var age_31Dec educ_best;
+ERROR: Variable AGE_31DEC not found.
+414          class year;
+415        run;
+
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: PROCEDURE MEANS used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              209.62k
+      OS Memory           8600.00k
+      Timestamp           01/16/2023 06:40:40 PM
+      Step Count                        17  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     6
+      Page Swaps                        0
+      Voluntary Context Switches        3
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+
+ERROR: Errors printed on pages 3,4,7,8,11,12,13,14,15.
+
+NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
+NOTE: The SAS System used:
+      real time           17.40 seconds
+      user cpu time       19.91 seconds
+      system cpu time     7.64 seconds
+      memory              9101391.98k
+      OS Memory           9104920.00k
+      Timestamp           01/16/2023 06:40:40 PM
+16                                                   The SAS System                       18:40 Monday, January 16, 2023
+
+      Step Count                        17  Switch Count  44
+      Page Faults                       0
+      Page Reclaims                     1819182
+      Page Swaps                        0
+      Voluntary Context Switches        16944
+      Involuntary Context Switches      5878
+      Block Input Operations            10370448
+      Block Output Operations           16524584
+      
