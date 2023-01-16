@@ -19,7 +19,7 @@ Extract data for estimating wage gaps
 
 /*create view with all years of data stacked together.*/
 %macro stackup;
-data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
+data INTERWRK.irais_jobstack / view=INTERWRK.irais_jobstack;
   set 
   %DO yr=2003 %TO 2017;
     IRAIS.rais_match_uniq_&yr.
@@ -27,7 +27,7 @@ data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
   ;
 run;
 
-data FASTWRK2.irais_plantstack / view=FASTWRK2.irais_plantstack;
+data INTERWRK.irais_plantstack / view=INTERWRK.irais_plantstack;
   set 
   %DO yr=2003 %TO 2017;
     IRAIS.rais_plant_uniq_&yr.
@@ -62,7 +62,7 @@ run;
                                      TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS
                                      RACE GENDER;
 
-data FASTWRK1.select_jobs(keep= PIS year PLANT_ID
+data INTERWRK.select_jobs(keep= PIS year PLANT_ID
 								CNAE20_CLASS MUNI ESTAB_SIZE_DEC31
                                 age_31Dec race_mode male_mode
                                 RACE GENDER male
@@ -88,7 +88,7 @@ data FASTWRK1.select_jobs(keep= PIS year PLANT_ID
 		if 0 then set INTERWRK.selected_workers 
 					  fastwrk2.irais_plantstack;
          	
-         	declare hash pltchars(dataset: 'fastwrk2.irais_plantstack',
+         	declare hash pltchars(dataset: 'INTERWRK.irais_plantstack',
          							ordered: 'no');
          	pltchars.definekey ("plant_id", "year");
          	pltchars.definedata("CNAE20_CLASS","MUNI","ESTAB_SIZE_DEC31","ESTAB_TYPE");
@@ -162,31 +162,31 @@ run;
 %MEND;
 %selectjobs;
 
-proc contents data = FASTWRK1.select_jobs;
+proc contents data = INTERWRK.select_jobs;
 run;
 
-proc print data = FASTWRK1.select_jobs (obs=20);
+proc print data = INTERWRK.select_jobs (obs=20);
 run;
 
-proc freq data = FASTWRK1.select_jobs;
+proc freq data = INTERWRK.select_jobs;
   tables PIS_valid PLANT_ID_valid ESTAB_SIZE_DEC31;
 run;
 
-proc means data = FASTWRK1.select_jobs;
+proc means data = INTERWRK.select_jobs;
   var age_31Dec TENURE_MONTHS NUM_HOURS_CONTRACTED;
 run;
 
-proc univariate data= FASTWRK1.select_jobs;
+proc univariate data= INTERWRK.select_jobs;
   var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
 run;
 
-proc sort data = FASTWRK1.select_jobs;
+proc sort data = INTERWRK.select_jobs;
   by PIS year;
 run; 
 
 /*assign dominant jobs and attach education*/
 data DBOUT.RAIS_data_extract;
-  merge FASTWRK1.select_jobs(in = left)
+  merge INTERWRK.select_jobs(in = left)
         IRAIS.educ_best(keep = pis year educ_best in = right);
   by PIS year;
   if left;

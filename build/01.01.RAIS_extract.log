@@ -1,4 +1,4 @@
-1                                                          The SAS System                             18:40 Monday, January 16, 2023
+1                                                          The SAS System                             18:43 Monday, January 16, 2023
 
 NOTE: Copyright (c) 2002-2012 by SAS Institute Inc., Cary, NC, USA. 
 NOTE: SAS (r) Proprietary Software 9.4 (TS1M0) 
@@ -38,8 +38,8 @@ The command line option "-nonews" will prevent this display.
 
 
 NOTE: SAS initialization used:
-      real time           0.29 seconds
-      cpu time            0.02 seconds
+      real time           0.04 seconds
+      cpu time            0.01 seconds
       
 1          /*****************************************************************************
 2          RAIS_extract
@@ -58,7 +58,7 @@ NOTE: Libref IRAIS was successfully assigned as follows:
       Levels:           1
       Engine(1):        V9 
       Physical Name(1): /work/imslab/WageGaps_Analysis/data/IRAIS-research
-2                                                          The SAS System                             18:40 Monday, January 16, 2023
+2                                                          The SAS System                             18:43 Monday, January 16, 2023
 
 NOTE: Library EXTERNAL does not exist.
 NOTE: Libref INTERWRK was successfully assigned as follows: 
@@ -80,12 +80,12 @@ NOTE: Format OCCSM_NAME has been output.
 NOTE: Format $REG has been output.
 
 NOTE: PROCEDURE FORMAT used (Total process time):
-      real time           0.02 seconds
+      real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
       memory              204.40k
       OS Memory           4760.00k
-      Timestamp           01/16/2023 06:40:23 PM
+      Timestamp           01/16/2023 06:43:37 PM
       Step Count                        1  Switch Count  0
       Page Faults                       0
       Page Reclaims                     112
@@ -101,7 +101,7 @@ NOTE: PROCEDURE FORMAT used (Total process time):
 229        
 230        /*create view with all years of data stacked together.*/
 231        %macro stackup;
-232        data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
+232        data INTERWRK.irais_jobstack / view=INTERWRK.irais_jobstack;
 233          set
 234          %DO yr=2003 %TO 2017;
 235            IRAIS.rais_match_uniq_&yr.
@@ -109,7 +109,7 @@ NOTE: PROCEDURE FORMAT used (Total process time):
 237          ;
 238        run;
 239        
-240        data FASTWRK2.irais_plantstack / view=FASTWRK2.irais_plantstack;
+240        data INTERWRK.irais_plantstack / view=INTERWRK.irais_plantstack;
 241          set
 242          %DO yr=2003 %TO 2017;
 243            IRAIS.rais_plant_uniq_&yr.
@@ -118,10 +118,10 @@ NOTE: PROCEDURE FORMAT used (Total process time):
 246        run;
 247        %mend;
 248        
-3                                                    The SAS System                       18:40 Monday, January 16, 2023
+3                                                    The SAS System                       18:43 Monday, January 16, 2023
 
 249        %stackup;
-MPRINT(STACKUP):   data FASTWRK2.irais_jobstack / view=FASTWRK2.irais_jobstack;
+MPRINT(STACKUP):   data INTERWRK.irais_jobstack / view=INTERWRK.irais_jobstack;
 SYMBOLGEN:  Macro variable YR resolves to 2003
 SYMBOLGEN:  Macro variable YR resolves to 2004
 SYMBOLGEN:  Macro variable YR resolves to 2005
@@ -143,28 +143,26 @@ IRAIS.rais_match_uniq_2010 IRAIS.rais_match_uniq_2011 IRAIS.rais_match_uniq_2012
 IRAIS.rais_match_uniq_2014 IRAIS.rais_match_uniq_2015 IRAIS.rais_match_uniq_2016 IRAIS.rais_match_uniq_2017 ;
 MPRINT(STACKUP):   run;
 
-ERROR: Libref FASTWRK2 is not assigned.
-ERROR: Unable to save DATA STEP view FASTWRK2.IRAIS_JOBSTACK.
-NOTE: The SAS System stopped processing this step because of errors.
+NOTE: DATA STEP view saved on file INTERWRK.IRAIS_JOBSTACK.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
 NOTE: DATA statement used (Total process time):
-      real time           0.75 seconds
+      real time           0.01 seconds
       user cpu time       0.00 seconds
-      system cpu time     0.02 seconds
-      memory              2625.18k
+      system cpu time     0.01 seconds
+      memory              2652.87k
       OS Memory           9368.00k
-      Timestamp           01/16/2023 06:40:24 PM
+      Timestamp           01/16/2023 06:43:37 PM
       Step Count                        2  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     764
+      Page Reclaims                     769
       Page Swaps                        0
-      Voluntary Context Switches        134
+      Voluntary Context Switches        70
       Involuntary Context Switches      0
-      Block Input Operations            2056
-      Block Output Operations           0
+      Block Input Operations            24
+      Block Output Operations           40
       
 
-
-MPRINT(STACKUP):   data FASTWRK2.irais_plantstack / view=FASTWRK2.irais_plantstack;
+MPRINT(STACKUP):   data INTERWRK.irais_plantstack / view=INTERWRK.irais_plantstack;
 SYMBOLGEN:  Macro variable YR resolves to 2003
 SYMBOLGEN:  Macro variable YR resolves to 2004
 SYMBOLGEN:  Macro variable YR resolves to 2005
@@ -178,34 +176,33 @@ SYMBOLGEN:  Macro variable YR resolves to 2012
 SYMBOLGEN:  Macro variable YR resolves to 2013
 SYMBOLGEN:  Macro variable YR resolves to 2014
 SYMBOLGEN:  Macro variable YR resolves to 2015
-4                                                    The SAS System                       18:40 Monday, January 16, 2023
-
 SYMBOLGEN:  Macro variable YR resolves to 2016
 SYMBOLGEN:  Macro variable YR resolves to 2017
+4                                                    The SAS System                       18:43 Monday, January 16, 2023
+
 MPRINT(STACKUP):   set IRAIS.rais_plant_uniq_2003 IRAIS.rais_plant_uniq_2004 IRAIS.rais_plant_uniq_2005 
 IRAIS.rais_plant_uniq_2006 IRAIS.rais_plant_uniq_2007 IRAIS.rais_plant_uniq_2008 IRAIS.rais_plant_uniq_2009 
 IRAIS.rais_plant_uniq_2010 IRAIS.rais_plant_uniq_2011 IRAIS.rais_plant_uniq_2012 IRAIS.rais_plant_uniq_2013 
 IRAIS.rais_plant_uniq_2014 IRAIS.rais_plant_uniq_2015 IRAIS.rais_plant_uniq_2016 IRAIS.rais_plant_uniq_2017 ;
 MPRINT(STACKUP):   run;
 
-ERROR: Libref FASTWRK2 is not assigned.
-ERROR: Unable to save DATA STEP view FASTWRK2.IRAIS_PLANTSTACK.
-NOTE: The SAS System stopped processing this step because of errors.
+NOTE: DATA STEP view saved on file INTERWRK.IRAIS_PLANTSTACK.
+NOTE: A stored DATA STEP view cannot run under a different operating system.
 NOTE: DATA statement used (Total process time):
-      real time           0.34 seconds
+      real time           0.00 seconds
       user cpu time       0.00 seconds
-      system cpu time     0.01 seconds
-      memory              2311.75k
+      system cpu time     0.00 seconds
+      memory              2325.78k
       OS Memory           9368.00k
-      Timestamp           01/16/2023 06:40:24 PM
+      Timestamp           01/16/2023 06:43:37 PM
       Step Count                        3  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     223
+      Page Reclaims                     231
       Page Swaps                        0
-      Voluntary Context Switches        105
+      Voluntary Context Switches        47
       Involuntary Context Switches      0
-      Block Input Operations            2040
-      Block Output Operations           0
+      Block Input Operations            0
+      Block Output Operations           24
       
 
 250        
@@ -231,21 +228,21 @@ MPRINT(SELECTWORKERS):   run;
 NOTE: There were 105338325 observations read from the data set IRAIS.RACE_GENDER_AGE_BEST.
 NOTE: The data set INTERWRK.SELECTED_WORKERS has 105338325 observations and 4 variables.
 NOTE: DATA statement used (Total process time):
-      real time           8.76 seconds
-      user cpu time       3.24 seconds
-      system cpu time     3.21 seconds
+      real time           6.20 seconds
+      user cpu time       3.21 seconds
+      system cpu time     2.70 seconds
       memory              756.53k
       OS Memory           7320.00k
-      Timestamp           01/16/2023 06:40:33 PM
+      Timestamp           01/16/2023 06:43:43 PM
       Step Count                        4  Switch Count  0
-5                                                    The SAS System                       18:40 Monday, January 16, 2023
-
       Page Faults                       0
-      Page Reclaims                     223
+      Page Reclaims                     241
       Page Swaps                        0
-      Voluntary Context Switches        130
-      Involuntary Context Switches      13
-      Block Input Operations            8262072
+5                                                    The SAS System                       18:43 Monday, January 16, 2023
+
+      Voluntary Context Switches        101
+      Involuntary Context Switches      14
+      Block Input Operations            176
       Block Output Operations           8262032
       
 
@@ -256,18 +253,18 @@ MPRINT(SELECTWORKERS):   run;
 NOTE: There were 105338325 observations read from the data set INTERWRK.SELECTED_WORKERS.
 NOTE: The data set INTERWRK.SELECTED_WORKERS has 105338325 observations and 4 variables.
 NOTE: PROCEDURE SORT used (Total process time):
-      real time           6.99 seconds
-      user cpu time       16.65 seconds
-      system cpu time     4.37 seconds
+      real time           7.40 seconds
+      user cpu time       15.97 seconds
+      system cpu time     4.80 seconds
       memory              9096971.14k
       OS Memory           9104920.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        5  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     1812086
+      Page Reclaims                     1812952
       Page Swaps                        0
-      Voluntary Context Switches        15721
-      Involuntary Context Switches      5859
+      Voluntary Context Switches        13438
+      Involuntary Context Switches      2964
       Block Input Operations            2097032
       Block Output Operations           8262032
       
@@ -276,19 +273,19 @@ MPRINT(SELECTWORKERS):   proc contents data = INTERWRK.selected_workers;
 MPRINT(SELECTWORKERS):   run;
 
 NOTE: PROCEDURE CONTENTS used (Total process time):
-      real time           0.12 seconds
-      user cpu time       0.00 seconds
-      system cpu time     0.01 seconds
-      memory              2139.37k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      real time           0.02 seconds
+      user cpu time       0.01 seconds
+      system cpu time     0.00 seconds
+      memory              2143.32k
+      OS Memory           8600.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        6  Switch Count  1
       Page Faults                       0
-      Page Reclaims                     657
+      Page Reclaims                     636
       Page Swaps                        0
-      Voluntary Context Switches        124
-      Involuntary Context Switches      1
-      Block Input Operations            4536
+      Voluntary Context Switches        113
+      Involuntary Context Switches      0
+      Block Input Operations            4528
       Block Output Operations           8
       
 NOTE: The PROCEDURE CONTENTS printed page 1.
@@ -298,13 +295,13 @@ NOTE: The PROCEDURE CONTENTS printed page 1.
 268        %macro selectjobs;
 269        
 270        %let inlist = PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE
-6                                                    The SAS System                       18:40 Monday, January 16, 2023
-
 271                                             EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED
 272                                             TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS
 273                                             RACE GENDER;
+6                                                    The SAS System                       18:43 Monday, January 16, 2023
+
 274        
-275        data FASTWRK1.select_jobs(keep= PIS year PLANT_ID
+275        data INTERWRK.select_jobs(keep= PIS year PLANT_ID
 276        								CNAE20_CLASS MUNI ESTAB_SIZE_DEC31
 277                                        age_31Dec race_mode male_mode
 278                                        RACE GENDER male
@@ -330,7 +327,7 @@ NOTE: The PROCEDURE CONTENTS printed page 1.
 298        		if 0 then set INTERWRK.selected_workers
 299        					  fastwrk2.irais_plantstack;
 300                 	
-301                 	declare hash pltchars(dataset: 'fastwrk2.irais_plantstack',
+301                 	declare hash pltchars(dataset: 'INTERWRK.irais_plantstack',
 302                 							ordered: 'no');
 303                 	pltchars.definekey ("plant_id", "year");
 304                 	pltchars.definedata("CNAE20_CLASS","MUNI","ESTAB_SIZE_DEC31","ESTAB_TYPE");
@@ -358,11 +355,11 @@ NOTE: The PROCEDURE CONTENTS printed page 1.
 326        	if rc1 = 0 then do;
 327                rc2 = pltchars.find();
 328                /*only keep processing if plant was found*/
-7                                                    The SAS System                       18:40 Monday, January 16, 2023
-
 329                region = substr(muni,1,1);
 330                state = substr(muni,1,2);
 331                /* if rc2 = 0 and (state = "43") then do; */
+7                                                    The SAS System                       18:43 Monday, January 16, 2023
+
 332                if rc2 = 0 then do;
 333        
 334                    age_31Dec = input(year,4.)-2003 + age_31Dec2003_mode;
@@ -406,8 +403,7 @@ NOTE: The PROCEDURE CONTENTS printed page 1.
 371        
 372        %MEND;
 373        %selectjobs;
-ERROR: Libref FASTWRK1 is not assigned.
-MPRINT(SELECTJOBS):   data FASTWRK1.select_jobs(keep= PIS year PLANT_ID CNAE20_CLASS MUNI ESTAB_SIZE_DEC31 age_31Dec 
+MPRINT(SELECTJOBS):   data INTERWRK.select_jobs(keep= PIS year PLANT_ID CNAE20_CLASS MUNI ESTAB_SIZE_DEC31 age_31Dec 
 race_mode male_mode RACE GENDER male race_white race_pardo race_preto race_other EARN_AVG_MONTH_REAL EARN_DEC_REAL 
 NUM_HOURS_CONTRACTED TYPE_OF_HIRE HIRE_DATE CAUSE_OF_SEP MONTH_OF_SEP DAY_OF_SEP OCCUP_CBO2002 TENURE_MONTHS 
 CONTRACT_TYPE );
@@ -418,36 +414,18 @@ MPRINT(SELECTJOBS):   do until (b=1);
 MPRINT(SELECTJOBS):   set EXTERNAL.brazil_cpi_vector;
 ERROR: File EXTERNAL.BRAZIL_CPI_VECTOR.DATA does not exist.
 MPRINT(SELECTJOBS):   array cpi_temp{2003:2017} cpi2003--cpi2017;
-8                                                    The SAS System                       18:40 Monday, January 16, 2023
-
 ERROR: Variable cpi2003 cannot be found on the list of previously defined variables.
 ERROR: Too few variables defined for the dimension(s) specified for the array cpi_temp.
 MPRINT(SELECTJOBS):   do yr = 2003 to 2017;
 MPRINT(SELECTJOBS):   cpi{yr} = cpi_temp{yr};
+8                                                    The SAS System                       18:43 Monday, January 16, 2023
+
 MPRINT(SELECTJOBS):   end;
 MPRINT(SELECTJOBS):   b=1;
 MPRINT(SELECTJOBS):   end;
 MPRINT(SELECTJOBS):   if 0 then set INTERWRK.selected_workers fastwrk2.irais_plantstack;
 ERROR: Libref FASTWRK2 is not assigned.
-ERROR: DATA STEP Component Object failure.  Aborted during the COMPILATION phase.
-NOTE: The SAS System stopped processing this step because of errors.
-NOTE: DATA statement used (Total process time):
-      real time           0.00 seconds
-      user cpu time       0.01 seconds
-      system cpu time     0.00 seconds
-      memory              302.15k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
-      Step Count                        7  Switch Count  0
-      Page Faults                       0
-      Page Reclaims                     68
-      Page Swaps                        0
-      Voluntary Context Switches        11
-      Involuntary Context Switches      0
-      Block Input Operations            0
-      Block Output Operations           0
-      
-MPRINT(SELECTJOBS):   declare hash pltchars(dataset: 'fastwrk2.irais_plantstack', ordered: 'no');
+MPRINT(SELECTJOBS):   declare hash pltchars(dataset: 'INTERWRK.irais_plantstack', ordered: 'no');
 MPRINT(SELECTJOBS):   pltchars.definekey ("plant_id", "year");
 MPRINT(SELECTJOBS):   pltchars.definedata("CNAE20_CLASS","MUNI","ESTAB_SIZE_DEC31","ESTAB_TYPE");
 MPRINT(SELECTJOBS):   pltchars.definedone();
@@ -478,8 +456,6 @@ SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HI
             CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
 SYMBOLGEN:  Macro variable YR resolves to 2008
 SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
-9                                                    The SAS System                       18:40 Monday, January 16, 2023
-
                  EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
             CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
 SYMBOLGEN:  Macro variable YR resolves to 2009
@@ -502,6 +478,8 @@ SYMBOLGEN:  Macro variable YR resolves to 2014
 SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
                  EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
             CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS                                      RACE GENDER
+9                                                    The SAS System                       18:43 Monday, January 16, 2023
+
 SYMBOLGEN:  Macro variable YR resolves to 2015
 SYMBOLGEN:  Macro variable INLIST resolves to PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE                                 
                  EARN_AVG_MONTH_NOM EARN_DEC_NOM NUM_HOURS_CONTRACTED                                      TYPE_OF_HIRE 
@@ -538,8 +516,6 @@ IRAIS.rais_match_uniq_2014(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_A
 NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
 IRAIS.rais_match_uniq_2015(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
 NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
-10                                                   The SAS System                       18:40 Monday, January 16, 2023
-
 IRAIS.rais_match_uniq_2016(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
 NUM_HOURS_CONTRACTED TYPE_OF_HIRE CAUSE_OF_SEP MONTH_OF_SEP OCCUP_CBO2002 TENURE_MONTHS RACE GENDER DAY_OF_SEP) 
 IRAIS.rais_match_uniq_2017(keep=PIS PLANT_ID YEAR CONTRACT_TYPE HIRE_DATE EARN_AVG_MONTH_NOM EARN_DEC_NOM 
@@ -562,6 +538,8 @@ MPRINT(SELECTJOBS):   label EARN_AVG_MONTH_REAL = 'Inflation Adjusted Monthly Ea
 'Inflation Adjusted December Earnings - 2015 Reais' age_31Dec = 'Age on Dec. 31 based on modal date of birth reported 
 for this PIS' male = "Employer reported gender is male" race_white = "Employer reported race is white" race_pardo = 
 "Employer reported race is pardo" race_preto = "Employer reported race is preto" race_other = "Employer reported some 
+10                                                   The SAS System                       18:43 Monday, January 16, 2023
+
 other race or race missing" ;
 MPRINT(VALIDATE_PIS):   array list_pis{10} _temporary_ (3 2 9 8 7 6 5 4 3 2);
 SYMBOLGEN:  Macro variable PIS resolves to PIS
@@ -598,8 +576,6 @@ MPRINT(VALIDATE_CNPJ):   cd1 = input(substr(PLANT_ID,13,1),1.);
 MPRINT(VALIDATE_CNPJ):   do pos = 2 to 13;
 SYMBOLGEN:  Macro variable CNPJ resolves to PLANT_ID
 MPRINT(VALIDATE_CNPJ):   sum = sum + list_cnpj{pos}*input(substr(PLANT_ID,pos-1,1),1.);
-11                                                   The SAS System                       18:40 Monday, January 16, 2023
-
 MPRINT(VALIDATE_CNPJ):   end;
 MPRINT(VALIDATE_CNPJ):   if (mod(sum,11) in (0,1) and cd1 = 0) or (11 - mod(sum,11) = cd1) then do;
 MPRINT(VALIDATE_CNPJ):   sum = 0;
@@ -619,66 +595,85 @@ in ("30","31","35","50") ) then output;
 MPRINT(SELECTJOBS):   end;
 MPRINT(SELECTJOBS):   end;
 MPRINT(SELECTJOBS):   run;
+
+NOTE: Character values have been converted to numeric values at the places given by: (Line):(Column).
+      373:106   
+11                                                   The SAS System                       18:43 Monday, January 16, 2023
+
+NOTE: Numeric values have been converted to character values at the places given by: (Line):(Column).
+      373:121   373:155   373:8     
+WARNING: The variable CNAE20_CLASS in the DROP, KEEP, or RENAME list has never been referenced.
+NOTE: The SAS System stopped processing this step because of errors.
+NOTE: SAS set option OBS=0 and will continue to check statements. This might cause NOTE: No observations in data set.
+WARNING: The data set INTERWRK.SELECT_JOBS may be incomplete.  When this step was stopped there were 0 observations and 
+         26 variables.
+NOTE: DATA statement used (Total process time):
+      real time           0.01 seconds
+      user cpu time       0.01 seconds
+      system cpu time     0.01 seconds
+      memory              2571.21k
+      OS Memory           12440.00k
+      Timestamp           01/16/2023 06:43:51 PM
+      Step Count                        7  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     462
+      Page Swaps                        0
+      Voluntary Context Switches        61
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           136
+      
+
 374        
-
-
-375        proc contents data = FASTWRK1.select_jobs;
-ERROR: Libref FASTWRK1 is not assigned.
+375        proc contents data = INTERWRK.select_jobs;
 376        run;
 
-NOTE: Statements not processed because of errors noted above.
 NOTE: PROCEDURE CONTENTS used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              194.00k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              516.32k
+      OS Memory           9624.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        8  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     2
+      Page Reclaims                     17
       Page Swaps                        0
-      Voluntary Context Switches        0
+      Voluntary Context Switches        5
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           8
       
-NOTE: The SAS System stopped processing this step because of errors.
+NOTE: The PROCEDURE CONTENTS printed pages 2-3.
+
 377        
-
-
-378        proc print data = FASTWRK1.select_jobs (obs=20);
-ERROR: Libref FASTWRK1 is not assigned.
+378        proc print data = INTERWRK.select_jobs (obs=20);
 379        run;
 
-NOTE: The SAS System stopped processing this step because of errors.
 NOTE: PROCEDURE PRINT used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              66.56k
-      OS Memory           8344.00k
-12                                                   The SAS System                       18:40 Monday, January 16, 2023
-
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              197.21k
+      OS Memory           9112.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        9  Switch Count  0
+12                                                   The SAS System                       18:43 Monday, January 16, 2023
+
       Page Faults                       0
-      Page Reclaims                     37
+      Page Reclaims                     32
       Page Swaps                        0
       Voluntary Context Switches        6
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           0
       
+
 380        
-
-
-381        proc freq data = FASTWRK1.select_jobs;
-ERROR: Libref FASTWRK1 is not assigned.
+381        proc freq data = INTERWRK.select_jobs;
 382          tables PIS_valid PLANT_ID_valid ESTAB_SIZE_DEC31;
-ERROR: No data set open to look up variables.
-ERROR: No data set open to look up variables.
-ERROR: No data set open to look up variables.
+ERROR: Variable PIS_VALID not found.
+ERROR: Variable PLANT_ID_VALID not found.
 383        run;
 
 NOTE: The SAS System stopped processing this step because of errors.
@@ -686,14 +681,14 @@ NOTE: PROCEDURE FREQ used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              31.43k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              172.81k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        10  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     20
+      Page Reclaims                     24
       Page Swaps                        0
-      Voluntary Context Switches        0
+      Voluntary Context Switches        3
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           0
@@ -701,12 +696,8 @@ NOTE: PROCEDURE FREQ used (Total process time):
 384        
 
 
-385        proc means data = FASTWRK1.select_jobs;
-ERROR: Libref FASTWRK1 is not assigned.
+385        proc means data = INTERWRK.select_jobs;
 386          var age_31Dec TENURE_MONTHS NUM_HOURS_CONTRACTED;
-ERROR: No data set open to look up variables.
-ERROR: No data set open to look up variables.
-ERROR: No data set open to look up variables.
 387        run;
 
 NOTE: The SAS System stopped processing this step because of errors.
@@ -714,103 +705,94 @@ NOTE: PROCEDURE MEANS used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              76.18k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              219.40k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        11  Switch Count  0
-13                                                   The SAS System                       18:40 Monday, January 16, 2023
-
       Page Faults                       0
-      Page Reclaims                     36
+      Page Reclaims                     42
+      Page Swaps                        0
+      Voluntary Context Switches        6
+      Involuntary Context Switches      0
+      Block Input Operations            0
+      Block Output Operations           0
+      
+388        
+13                                                   The SAS System                       18:43 Monday, January 16, 2023
+
+
+
+389        proc univariate data= INTERWRK.select_jobs;
+390          var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
+391        run;
+
+NOTE: PROCEDURE UNIVARIATE used (Total process time):
+      real time           0.00 seconds
+      user cpu time       0.00 seconds
+      system cpu time     0.00 seconds
+      memory              202.50k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
+      Step Count                        12  Switch Count  0
+      Page Faults                       0
+      Page Reclaims                     31
       Page Swaps                        0
       Voluntary Context Switches        3
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           0
       
-388        
 
-
-389        proc univariate data= FASTWRK1.select_jobs;
-ERROR: Libref FASTWRK1 is not assigned.
-390          var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
-391        run;
-
-NOTE: The SAS System stopped processing this step because of errors.
-NOTE: PROCEDURE UNIVARIATE used (Total process time):
-      real time           0.00 seconds
-      user cpu time       0.00 seconds
-      system cpu time     0.00 seconds
-      memory              60.56k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
-      Step Count                        12  Switch Count  0
-      Page Faults                       0
-      Page Reclaims                     27
-      Page Swaps                        0
-      Voluntary Context Switches        0
-      Involuntary Context Switches      0
-      Block Input Operations            0
-      Block Output Operations           0
-      
 392        
-
-
-393        proc sort data = FASTWRK1.select_jobs;
-ERROR: Libref FASTWRK1 is not assigned.
+393        proc sort data = INTERWRK.select_jobs;
 394          by PIS year;
 395        run;
 
-NOTE: The SAS System stopped processing this step because of errors.
-NOTE: SAS set option OBS=0 and will continue to check statements. This might cause NOTE: No observations in data set.
 NOTE: PROCEDURE SORT used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              23.03k
-      OS Memory           8344.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              165.03k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        13  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     1
+      Page Reclaims                     5
       Page Swaps                        0
-      Voluntary Context Switches        0
+      Voluntary Context Switches        3
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           0
-14                                                   The SAS System                       18:40 Monday, January 16, 2023
-
       
+
 396        
 397        /*assign dominant jobs and attach education*/
-
-
 398        data DBOUT.RAIS_data_extract;
-399          merge FASTWRK1.select_jobs(in = left)
+399          merge INTERWRK.select_jobs(in = left)
 400                IRAIS.educ_best(keep = pis year educ_best in = right);
-ERROR: Libref FASTWRK1 is not assigned.
 401          by PIS year;
 402          if left;
 403        run;
 
-NOTE: The SAS System stopped processing this step because of errors.
-WARNING: The data set DBOUT.RAIS_DATA_EXTRACT may be incomplete.  When this step was stopped there were 0 observations 
-         and 3 variables.
+NOTE: The data set DBOUT.RAIS_DATA_EXTRACT has 0 observations and 27 variables.
+WARNING: Data set DBOUT.RAIS_DATA_EXTRACT was not replaced because this step was stopped.
 NOTE: DATA statement used (Total process time):
-      real time           0.04 seconds
+      real time           0.00 seconds
+14                                                   The SAS System                       18:43 Monday, January 16, 2023
+
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              399.43k
-      OS Memory           8600.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              581.75k
+      OS Memory           9112.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        14  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     15
+      Page Reclaims                     10
       Page Swaps                        0
-      Voluntary Context Switches        26
+      Voluntary Context Switches        31
       Involuntary Context Switches      0
-      Block Input Operations            136
-      Block Output Operations           136
+      Block Input Operations            0
+      Block Output Operations           8
       
 
 404        
@@ -821,25 +803,23 @@ NOTE: PROCEDURE CONTENTS used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              499.84k
-      OS Memory           8600.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              501.42k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        15  Switch Count  0
       Page Faults                       0
-      Page Reclaims                     16
+      Page Reclaims                     15
       Page Swaps                        0
-      Voluntary Context Switches        5
+      Voluntary Context Switches        4
       Involuntary Context Switches      0
       Block Input Operations            0
       Block Output Operations           8
       
-NOTE: The PROCEDURE CONTENTS printed page 2.
+NOTE: The PROCEDURE CONTENTS printed page 4.
 
 407        
 408        proc UNIVARIATE data = DBOUT.RAIS_data_extract;
 409          var EARN_AVG_MONTH_REAL EARN_DEC_REAL;
-15                                                   The SAS System                       18:40 Monday, January 16, 2023
-
 ERROR: Variable EARN_AVG_MONTH_REAL not found.
 ERROR: Variable EARN_DEC_REAL not found.
 410        run;
@@ -849,15 +829,17 @@ NOTE: PROCEDURE UNIVARIATE used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              194.00k
-      OS Memory           8600.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              195.50k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        16  Switch Count  0
       Page Faults                       0
       Page Reclaims                     7
       Page Swaps                        0
       Voluntary Context Switches        3
       Involuntary Context Switches      0
+15                                                   The SAS System                       18:43 Monday, January 16, 2023
+
       Block Input Operations            0
       Block Output Operations           0
       
@@ -875,9 +857,9 @@ NOTE: PROCEDURE MEANS used (Total process time):
       real time           0.00 seconds
       user cpu time       0.00 seconds
       system cpu time     0.00 seconds
-      memory              209.62k
-      OS Memory           8600.00k
-      Timestamp           01/16/2023 06:40:40 PM
+      memory              212.12k
+      OS Memory           8856.00k
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        17  Switch Count  0
       Page Faults                       0
       Page Reclaims                     6
@@ -888,24 +870,22 @@ NOTE: PROCEDURE MEANS used (Total process time):
       Block Output Operations           0
       
 
-ERROR: Errors printed on pages 3,4,7,8,11,12,13,14,15.
+ERROR: Errors printed on pages 7,8,12,14,15.
 
 NOTE: SAS Institute Inc., SAS Campus Drive, Cary, NC USA 27513-2414
 NOTE: The SAS System used:
-      real time           17.40 seconds
-      user cpu time       19.91 seconds
-      system cpu time     7.64 seconds
-      memory              9101391.98k
+      real time           13.75 seconds
+      user cpu time       19.21 seconds
+      system cpu time     7.55 seconds
+      memory              9101419.60k
       OS Memory           9104920.00k
-      Timestamp           01/16/2023 06:40:40 PM
-16                                                   The SAS System                       18:40 Monday, January 16, 2023
-
+      Timestamp           01/16/2023 06:43:51 PM
       Step Count                        17  Switch Count  44
       Page Faults                       0
-      Page Reclaims                     1819182
+      Page Reclaims                     1820477
       Page Swaps                        0
-      Voluntary Context Switches        16944
-      Involuntary Context Switches      5878
-      Block Input Operations            10370448
-      Block Output Operations           16524584
+      Voluntary Context Switches        14556
+      Involuntary Context Switches      2984
+      Block Input Operations            2104312
+      Block Output Operations           16524664
       

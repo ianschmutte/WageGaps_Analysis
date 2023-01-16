@@ -1,12 +1,12 @@
-                                                     The SAS System                   18:40 Monday, January 16, 2023   1
+                                                     The SAS System                   18:43 Monday, January 16, 2023   1
 
                                                  The CONTENTS Procedure
 
      Data Set Name        INTERWRK.SELECTED_WORKERS                                Observations          105338325
      Member Type          DATA                                                     Variables             4        
      Engine               V9                                                       Indexes               0        
-     Created              01/16/2023 18:40:33                                      Observation Length    40       
-     Last Modified        01/16/2023 18:40:33                                      Deleted Observations  0        
+     Created              01/16/2023 18:43:43                                      Observation Length    40       
+     Last Modified        01/16/2023 18:43:43                                      Deleted Observations  0        
      Protection                                                                    Compressed            NO       
      Data Set Type                                                                 Sorted                YES      
      Label                                                                                                        
@@ -46,7 +46,78 @@
                                                   Sortedby       PIS  
                                                   Validated      YES  
                                                   Character Set  ASCII
-                                                     The SAS System                   18:40 Monday, January 16, 2023   2
+                                                     The SAS System                   18:43 Monday, January 16, 2023   2
+
+                                                 The CONTENTS Procedure
+
+        Data Set Name        INTERWRK.SELECT_JOBS                                     Observations          0  
+        Member Type          DATA                                                     Variables             26 
+        Engine               V9                                                       Indexes               0  
+        Created              01/16/2023 18:43:51                                      Observation Length    168
+        Last Modified        01/16/2023 18:43:51                                      Deleted Observations  0  
+        Protection                                                                    Compressed            NO 
+        Data Set Type                                                                 Sorted                NO 
+        Label                                                                                                  
+        Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                             
+        Encoding             latin1  Western (ISO)                                                             
+
+
+                                           Engine/Host Dependent Information
+
+             Data Set Page Size          65536                                                            
+             Number of Data Set Pages    1                                                                
+             First Data Page             1                                                                
+             Max Obs per Page            389                                                              
+             Obs in First Data Page      0                                                                
+             Number of Data Set Repairs  0                                                                
+             Filename                    /work/imslab/WageGaps_Analysis/data/interwrk/select_jobs.sas7bdat
+             Release Created             9.0401M0                                                         
+             Host Created                Linux                                                            
+             Inode Number                1.441203E17                                                      
+             Access Permission           rw-rw----                                                        
+             Owner Name                  schmutte                                                         
+             File Size (bytes)           131072                                                           
+
+
+                                       Alphabetic List of Variables and Attributes
+ 
+  # Variable             Type Len Format     Informat Label
+
+  4 CAUSE_OF_SEP         Char   2            $2.      Reason for contract termination                                  
+  5 CONTRACT_TYPE        Char   2            $2.      Type of employment contract                                      
+ 12 DAY_OF_SEP           Char   2            $2.      Contract end date: day                                           
+ 19 EARN_AVG_MONTH_REAL  Num    8                     Inflation Adjusted Monthly Earnings - 2015 Reais                 
+ 20 EARN_DEC_REAL        Num    8                     Inflation Adjusted December Earnings - 2015 Reais                
+ 26 ESTAB_SIZE_DEC31     Num    8                                                                                      
+ 14 GENDER               Char   1                                                                                      
+  8 HIRE_DATE            Num    8 DDMMYYS10. DDMMYY8. Date of contract initiation                                      
+  6 MONTH_OF_SEP         Char   2            $2.      Month of contract termination                                    
+ 10 NUM_HOURS_CONTRACTED Num    8            COMMA2.  Number of weekly hours contracted                                
+ 16 OCCUP_CBO2002        Char   6            $6.      Occupation classification per CBO 2002                           
+  1 PIS                  Char  11            $11.     Worker PIS code                                                  
+ 11 PLANT_ID             Char  14            $14.     Plant identifier (either CNPJ or CEI)                            
+  7 RACE                 Char   2            $2.      Worker race (pre-2006 classifications)                           
+  9 TENURE_MONTHS        Num    8            NUMX6.   Tenure in contract (in months)                                   
+ 15 TYPE_OF_HIRE         Char   2            $2.      Type of contract initiation                                      
+ 18 age_31Dec            Num    8                     Age on Dec. 31 based on modal date of birth reported for this PIS
+ 21 male                 Num    8                     Employer reported gender is male                                 
+  3 male_mode            Num    8                     Modal value of male indicator across all jobs                    
+ 17 muni                 Num    8                                                                                      
+  2 race_mode            Num    8                     Modal race across all jobs                                       
+ 25 race_other           Num    8                     Employer reported some other race or race missing                
+ 23 race_pardo           Num    8                     Employer reported race is pardo                                  
+                                                     The SAS System                   18:43 Monday, January 16, 2023   3
+
+                                                 The CONTENTS Procedure
+
+                                       Alphabetic List of Variables and Attributes
+ 
+  # Variable             Type Len Format     Informat Label
+
+ 24 race_preto           Num    8                     Employer reported race is preto                                  
+ 22 race_white           Num    8                     Employer reported race is white                                  
+ 13 year                 Char   4 $4.                 sample year                                                      
+                                                     The SAS System                   18:43 Monday, January 16, 2023   4
 
                                                  The CONTENTS Procedure
 
