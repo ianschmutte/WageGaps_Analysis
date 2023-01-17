@@ -1,0 +1,96 @@
+                                                           The SAS System                         13:05 Wednesday, June 26, 2019   1
+
+                                                       The CONTENTS Procedure
+
+               Data Set Name        WORK.CPI                                                 Observations          39
+               Member Type          DATA                                                     Variables             2 
+               Engine               V9                                                       Indexes               0 
+               Created              06/26/2019 13:05:44                                      Observation Length    16
+               Last Modified        06/26/2019 13:05:44                                      Deleted Observations  0 
+               Protection                                                                    Compressed            NO
+               Data Set Type                                                                 Sorted                NO
+               Label                                                                                                 
+               Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                            
+               Encoding             latin1  Western (ISO)                                                            
+
+
+                                                 Engine/Host Dependent Information
+
+                      Data Set Page Size          65536                                                       
+                      Number of Data Set Pages    1                                                           
+                      First Data Page             1                                                           
+                      Max Obs per Page            4061                                                        
+                      Obs in First Data Page      39                                                          
+                      Number of Data Set Repairs  0                                                           
+                      Filename                    /temporary/SASwork/SAS_workDCBA00006829_Valyria/cpi.sas7bdat
+                      Release Created             9.0401M0                                                    
+                      Host Created                Linux                                                       
+                      Inode Number                65667075                                                    
+                      Access Permission           rw-rw-r--                                                   
+                      Owner Name                  schmutte                                                    
+                      File Size (bytes)           131072                                                      
+
+
+                                             Alphabetic List of Variables and Attributes
+ 
+                                 #    Variable            Type    Len    Format    Label
+
+                                 2    BRACPIALLAINMEI     Num       8    BEST.     BRACPIALLAINMEI 
+                                 1    observation_date    Num       8    DATE9.    observation_date
+                                                           The SAS System                         13:05 Wednesday, June 26, 2019   2
+
+                                                      observation_
+                                               Obs        date        BRACPIALLAINMEI
+
+                                                 1     01JAN1980       2.581166E-10  
+                                                 2     01JAN1981       5.206858E-10  
+                                                 3     01JAN1982       1.0442008E-9  
+                                                 4     01JAN1983       2.4541592E-9  
+                                                 5     01JAN1984       7.1691391E-9  
+                                                 6     01JAN1985       2.3370674E-8  
+                                                 7     01JAN1986        5.775891E-8  
+                                                 8     01JAN1987       1.8964344E-7  
+                                                 9     01JAN1988       1.3827154E-6  
+                                                10     01JAN1989       0.0000211656  
+                                                11     01JAN1990       0.0006450701  
+                                                12     01JAN1991       0.0034368474  
+                                                13     01JAN1992       0.0361543305  
+                                                14     01JAN1993       0.7329859688  
+                                                15     01JAN1994       15.948956564  
+                                                16     01JAN1995       26.476389675  
+                                                17     01JAN1996       30.648450623  
+                                                18     01JAN1997       32.771380689  
+                                                19     01JAN1998       33.818451304  
+                                                20     01JAN1999       35.461503005  
+                                                21     01JAN2000       37.959461299  
+                                                22     01JAN2001       40.556024736  
+                                                23     01JAN2002       43.983075491  
+                                                24     01JAN2003       50.455149741  
+                                                25     01JAN2004       53.783769361  
+                                                26     01JAN2005        57.47846541  
+                                                27     01JAN2006        59.88311617  
+                                                28     01JAN2007       62.063623905  
+                                                29     01JAN2008       65.587965068  
+                                                30     01JAN2009       68.793927625  
+                                                31     01JAN2010       72.260265762  
+                                                32     01JAN2011       77.055723893  
+                                                33     01JAN2012       81.219471074  
+                                                34     01JAN2013       86.258599915  
+                                                35     01JAN2014       91.718038013  
+                                                36     01JAN2015                100  
+                                                37     01JAN2016       108.73912888  
+                                                38     01JAN2017       112.48667864  
+                                                39     01JAN2018         116.609147  
+                                                           The SAS System                         13:05 Wednesday, June 26, 2019   3
+
+  Obs   cpi1980    cpi1981    cpi1982    cpi1983    cpi1984    cpi1985    cpi1986   cpi1987   cpi1988     cpi1989    cpi1990
+
+   1  2.5812E-12 5.2069E-12 1.0442E-11 2.4542E-11 7.1691E-11 2.3371E-10 5.7759E-10 1.8964E-9 1.3827E-8 .000000212 .000006451
+
+  Obs    cpi1991    cpi1992    cpi1993 cpi1994 cpi1995 cpi1996 cpi1997 cpi1998 cpi1999 cpi2000 cpi2001 cpi2002 cpi2003 cpi2004
+
+   1  .000034368 .000361543 .007329860 0.15949 0.26476 0.30648 0.32771 0.33818 0.35462 0.37959 0.40556 0.43983 0.50455 0.53784
+
+  Obs cpi2005  cpi2006  cpi2007  cpi2008  cpi2009  cpi2010  cpi2011  cpi2012  cpi2013  cpi2014  cpi2015  cpi2016  cpi2017  cpi2018
+
+   1  0.57478  0.59883  0.62064  0.65588  0.68794  0.72260  0.77056  0.81219  0.86259  0.91718     1     1.08739  1.12487  1.16609

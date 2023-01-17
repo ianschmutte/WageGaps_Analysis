@@ -1,12 +1,12 @@
-                                                     The SAS System                   18:43 Monday, January 16, 2023   1
+                                                     The SAS System                   18:49 Monday, January 16, 2023   1
 
                                                  The CONTENTS Procedure
 
      Data Set Name        INTERWRK.SELECTED_WORKERS                                Observations          105338325
      Member Type          DATA                                                     Variables             4        
      Engine               V9                                                       Indexes               0        
-     Created              01/16/2023 18:43:43                                      Observation Length    40       
-     Last Modified        01/16/2023 18:43:43                                      Deleted Observations  0        
+     Created              01/16/2023 18:49:56                                      Observation Length    40       
+     Last Modified        01/16/2023 18:49:56                                      Deleted Observations  0        
      Protection                                                                    Compressed            NO       
      Data Set Type                                                                 Sorted                YES      
      Label                                                                                                        
@@ -46,29 +46,29 @@
                                                   Sortedby       PIS  
                                                   Validated      YES  
                                                   Character Set  ASCII
-                                                     The SAS System                   18:43 Monday, January 16, 2023   2
+                                                     The SAS System                   18:49 Monday, January 16, 2023   2
 
                                                  The CONTENTS Procedure
 
-        Data Set Name        INTERWRK.SELECT_JOBS                                     Observations          0  
-        Member Type          DATA                                                     Variables             26 
-        Engine               V9                                                       Indexes               0  
-        Created              01/16/2023 18:43:51                                      Observation Length    168
-        Last Modified        01/16/2023 18:43:51                                      Deleted Observations  0  
-        Protection                                                                    Compressed            NO 
-        Data Set Type                                                                 Sorted                NO 
-        Label                                                                                                  
-        Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                             
-        Encoding             latin1  Western (ISO)                                                             
+     Data Set Name        INTERWRK.SELECT_JOBS                                     Observations          660172301
+     Member Type          DATA                                                     Variables             27       
+     Engine               V9                                                       Indexes               0        
+     Created              01/16/2023 18:50:03                                      Observation Length    168      
+     Last Modified        01/16/2023 18:50:03                                      Deleted Observations  0        
+     Protection                                                                    Compressed            NO       
+     Data Set Type                                                                 Sorted                NO       
+     Label                                                                                                        
+     Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                                   
+     Encoding             latin1  Western (ISO)                                                                   
 
 
                                            Engine/Host Dependent Information
 
              Data Set Page Size          65536                                                            
-             Number of Data Set Pages    1                                                                
+             Number of Data Set Pages    1697102                                                          
              First Data Page             1                                                                
              Max Obs per Page            389                                                              
-             Obs in First Data Page      0                                                                
+             Obs in First Data Page      352                                                              
              Number of Data Set Repairs  0                                                                
              Filename                    /work/imslab/WageGaps_Analysis/data/interwrk/select_jobs.sas7bdat
              Release Created             9.0401M0                                                         
@@ -76,37 +76,37 @@
              Inode Number                1.441203E17                                                      
              Access Permission           rw-rw----                                                        
              Owner Name                  schmutte                                                         
-             File Size (bytes)           131072                                                           
+             File Size (bytes)           111221342208                                                     
 
 
                                        Alphabetic List of Variables and Attributes
  
   # Variable             Type Len Format     Informat Label
 
-  4 CAUSE_OF_SEP         Char   2            $2.      Reason for contract termination                                  
-  5 CONTRACT_TYPE        Char   2            $2.      Type of employment contract                                      
- 12 DAY_OF_SEP           Char   2            $2.      Contract end date: day                                           
- 19 EARN_AVG_MONTH_REAL  Num    8                     Inflation Adjusted Monthly Earnings - 2015 Reais                 
- 20 EARN_DEC_REAL        Num    8                     Inflation Adjusted December Earnings - 2015 Reais                
- 26 ESTAB_SIZE_DEC31     Num    8                                                                                      
- 14 GENDER               Char   1                                                                                      
-  8 HIRE_DATE            Num    8 DDMMYYS10. DDMMYY8. Date of contract initiation                                      
-  6 MONTH_OF_SEP         Char   2            $2.      Month of contract termination                                    
- 10 NUM_HOURS_CONTRACTED Num    8            COMMA2.  Number of weekly hours contracted                                
- 16 OCCUP_CBO2002        Char   6            $6.      Occupation classification per CBO 2002                           
+  9 CAUSE_OF_SEP         Char   2            $2.      Reason for contract termination                                  
+  6 CNAE20_CLASS         Char   5 $5.        $5.      Industry class (5 digit) according to CNAE 2.0                   
+ 10 CONTRACT_TYPE        Char   2            $2.      Type of employment contract                                      
+ 16 DAY_OF_SEP           Char   2            $2.      Contract end date: day                                           
+ 21 EARN_AVG_MONTH_REAL  Num    8                     Inflation Adjusted Monthly Earnings - 2015 Reais                 
+ 22 EARN_DEC_REAL        Num    8                     Inflation Adjusted December Earnings - 2015 Reais                
+  7 ESTAB_SIZE_DEC31     Char   2            $2.      Estab. size category: contracts active on Dec. 31                
+ 17 GENDER               Char   1                                                                                      
+ 13 HIRE_DATE            Num    8 DDMMYYS10. DDMMYY8. Date of contract initiation                                      
+ 11 MONTH_OF_SEP         Char   2            $2.      Month of contract termination                                    
+  8 MUNI                 Char   6            $6.      Establishment Municipality                                       
+ 15 NUM_HOURS_CONTRACTED Num    8            COMMA2.  Number of weekly hours contracted                                
+ 19 OCCUP_CBO2002        Char   6            $6.      Occupation classification per CBO 2002                           
   1 PIS                  Char  11            $11.     Worker PIS code                                                  
- 11 PLANT_ID             Char  14            $14.     Plant identifier (either CNPJ or CEI)                            
-  7 RACE                 Char   2            $2.      Worker race (pre-2006 classifications)                           
-  9 TENURE_MONTHS        Num    8            NUMX6.   Tenure in contract (in months)                                   
- 15 TYPE_OF_HIRE         Char   2            $2.      Type of contract initiation                                      
- 18 age_31Dec            Num    8                     Age on Dec. 31 based on modal date of birth reported for this PIS
- 21 male                 Num    8                     Employer reported gender is male                                 
+  4 PLANT_ID             Char  14            $14.     Plant identifier (either CNPJ or CEI)                            
+ 12 RACE                 Char   2            $2.      Worker race (pre-2006 classifications)                           
+ 14 TENURE_MONTHS        Num    8            NUMX6.   Tenure in contract (in months)                                   
+ 18 TYPE_OF_HIRE         Char   2            $2.      Type of contract initiation                                      
+ 20 age_31Dec            Num    8                     Age on Dec. 31 based on modal date of birth reported for this PIS
+ 23 male                 Num    8                     Employer reported gender is male                                 
   3 male_mode            Num    8                     Modal value of male indicator across all jobs                    
- 17 muni                 Num    8                                                                                      
   2 race_mode            Num    8                     Modal race across all jobs                                       
- 25 race_other           Num    8                     Employer reported some other race or race missing                
- 23 race_pardo           Num    8                     Employer reported race is pardo                                  
-                                                     The SAS System                   18:43 Monday, January 16, 2023   3
+ 27 race_other           Num    8                     Employer reported some other race or race missing                
+                                                     The SAS System                   18:49 Monday, January 16, 2023   3
 
                                                  The CONTENTS Procedure
 
@@ -114,32 +114,254 @@
  
   # Variable             Type Len Format     Informat Label
 
- 24 race_preto           Num    8                     Employer reported race is preto                                  
- 22 race_white           Num    8                     Employer reported race is white                                  
- 13 year                 Char   4 $4.                 sample year                                                      
-                                                     The SAS System                   18:43 Monday, January 16, 2023   4
+ 25 race_pardo           Num    8                     Employer reported race is pardo                                  
+ 26 race_preto           Num    8                     Employer reported race is preto                                  
+ 24 race_white           Num    8                     Employer reported race is white                                  
+  5 year                 Char   4 $4.                 sample year                                                      
+                                                     The SAS System                   18:49 Monday, January 16, 2023   4
+
+                                                                ESTAB_
+                        race_ male_                     CNAE20_ SIZE_         CAUSE_ CONTRACT_ MONTH_
+        Obs     PIS      mode  mode    PLANT_ID    year  CLASS  DEC31   MUNI  OF_SEP   TYPE    OF_SEP RACE  HIRE_DATE
+
+          1 10000000016   2     1   00019703001567 2003  60232    10   530010   00      10       00    09  07/04/2003
+          2 10000000016   2     1   00344082000191 2003  47890    02   352440   00      10       00    02  01/12/2003
+          3 10000000016   2     1   00499252000107 2003  82997    05   352440   21      10       09    02  23/06/2003
+          4 10000000016   2     1   01128436000123 2003  52230    03   352440   00      10       00    02  01/08/2003
+          5 10000000016   2     1   01542403000125 2003  50300    03   352440   21      10       10    02  01/10/2003
+          6 10000000016   2     1   01984417000107 2003  45200    06   354730   11      10       08    02  05/07/2003
+          7 10000000016   2     1   02598573000194 2003  55212    04   351830   00      10       00    02  01/08/2003
+          8 10000000016   2     1   02703896000109 2003  42995    04   310620   11      10       03    04  03/02/2003
+          9 10000000016   2     1   02817276000192 2003  47547    02   352440   00      10       00    02  01/09/2003
+         10 10000000016   2     1   03113773000172 2003  47890    04   352440   00      10       00    02  24/09/2003
+         11 10000000016   2     1   03495840000160 2003  55212    03   350635   00      10       00    08  01/11/2003
+         12 10000000016   2     1   03706094000107 2003  25127    03   160060   00      80       00    08  01/01/2000
+         13 10000000016   2     1   03842674000121 2003  45200    04   530010   00      10       00    02  05/12/2003
+         14 10000000016   2     1   04003176000158 2003  55212    03   350635   00      10       00    02  01/09/2003
+         15 10000000016   2     1   04189891000127 2003  52213    02   352440   00      10       00    02  01/08/2003
+         16 10000000016   2     1   04361675000117 2003  47890    02   350635   00      10       00    02  01/11/2003
+         17 10000000016   2     1   04508986000166 2003  47890    02   352440   00      10       00    02  01/01/2003
+         18 10000000016   2     1   04617758000124 2003  52230    02   352440   00      10       00    02  01/10/2003
+         19 10000000016   2     1   04711421000181 2003  22179    02   355030   00      10       00    02  01/12/2003
+         20 10000000016   2     1   04849606000157 2003  52132    04   354990   00      10       00    02  01/08/2003
+
+ 
+            TENURE_ NUM_HOURS_  DAY_         TYPE_OF_ OCCUP_   age_  EARN_AVG_   EARN_       race_ race_ race_ race_
+        Obs  MONTHS CONTRACTED OF_SEP GENDER   HIRE   CBO2002 31Dec MONTH_REAL DEC_REAL male white pardo preto other
+
+          1    8.6      40       0      M       2     511215    22     751.38    795.16   1    0     0     0     1  
+          2    0.9      44       0      M       1     716305    22     927.56    927.56   1    1     0     0     0  
+          3    2.5      44       08     M       1     411005    22     649.59      0.00   1    1     0     0     0  
+          4    4.9      44       0      M       2     521110    22     888.69    939.45   1    1     0     0     0  
+          5    0.9      44       30     M       1     911120    22    1387.37      0.00   1    1     0     0     0  
+          6    1.0      44       06     M       2     715210    22    1387.27      0.00   1    1     0     0     0  
+          7    4.9      44       0      M       1     992225    22     507.60    505.52   1    1     0     0     0  
+          8    1.1      44       07     M       2     715210    22     839.97      0.00   1    0     0     1     0  
+          9    3.8      44       0      M       1     992225    22     590.47    661.97   1    1     0     0     0  
+         10    3.2      44       0      M       2     911305    22    1123.24   1345.77   1    1     0     0     0  
+         11    1.8      44       0      F       1     512105    22     709.64    709.64   0    0     1     0     0  
+         12   47.8      44       0      F       0     123110    22    1959.30      0.00   0    0     1     0     0  
+         13    0.8      44       0      M       1     519935    22     624.83    624.83   1    1     0     0     0  
+         14    3.8      44       0      F       1     422105    22     990.98    990.98   0    1     0     0     0  
+         15    4.9      44       0      M       1     521110    22     990.98    990.98   1    1     0     0     0  
+         16    1.8      44       0      M       1     512105    22     832.36    832.36   1    1     0     0     0  
+         17   11.9      44       0      F       1     311710    22     676.70    927.56   0    1     0     0     0  
+         18    2.8      44       0      M       1     848510    22     891.88    891.88   1    1     0     0     0  
+         19    0.9      44       0      M       1     311710    22    1104.35   1104.35   1    1     0     0     0  
+         20    4.9      44       0      M       1     811420    22     629.47    665.94   1    1     0     0     0  
+                                                     The SAS System                   18:49 Monday, January 16, 2023   5
+
+                                                  The MEANS Procedure
+
+  Variable               Label                                                                       N            Mean
+  --------------------------------------------------------------------------------------------------------------------
+  age_31Dec              Age on Dec. 31 based on modal date of birth reported for this PIS   660025670      33.6364550
+  TENURE_MONTHS          Tenure in contract (in months)                                      660172301      36.3187633
+  NUM_HOURS_CONTRACTED   Number of weekly hours contracted                                   660172301      42.0728549
+  --------------------------------------------------------------------------------------------------------------------
+
+ Variable               Label                                                                    Std Dev        Minimum
+ ----------------------------------------------------------------------------------------------------------------------
+ age_31Dec              Age on Dec. 31 based on modal date of birth reported for this PIS     10.9985661              0
+ TENURE_MONTHS          Tenure in contract (in months)                                        56.1255169              0
+ NUM_HOURS_CONTRACTED   Number of weekly hours contracted                                      5.6987998      1.0000000
+ ----------------------------------------------------------------------------------------------------------------------
+
+        Variable               Label                                                                    Maximum
+        -------------------------------------------------------------------------------------------------------
+        age_31Dec              Age on Dec. 31 based on modal date of birth reported for this PIS    116.0000000
+        TENURE_MONTHS          Tenure in contract (in months)                                       600.0000000
+        NUM_HOURS_CONTRACTED   Number of weekly hours contracted                                     44.0000000
+        -------------------------------------------------------------------------------------------------------
+                                                     The SAS System                   18:49 Monday, January 16, 2023   6
+
+                                                The UNIVARIATE Procedure
+                   Variable:  EARN_AVG_MONTH_REAL  (Inflation Adjusted Monthly Earnings - 2015 Reais)
+
+                                                        Moments
+
+                            N                   660172301    Sum Weights          660172301
+                            Mean               1851.28489    Sum Observations    1.22217E12
+                            Std Deviation      2728.23509    Variance            7443266.73
+                            Skewness           9.34574434    Kurtosis            161.561884
+                            Uncorrected SS     7.17642E15    Corrected SS        4.91384E15
+                            Coeff Variation    147.369814    Std Error Mean      0.10618255
+
+
+                                               Basic Statistical Measures
+ 
+                                     Location                    Variability
+
+                                 Mean     1851.285     Std Deviation               2728
+                                 Median   1166.120     Variance                 7443267
+                                 Mode        0.000     Range                     124948
+                                                       Interquartile Range    950.06205
+
+
+                                               Tests for Location: Mu0=0
+ 
+                                    Test           -Statistic-    -----p Value------
+
+                                    Student's t    t  17434.93    Pr > |t|    <.0001
+                                    Sign           M  3.2423E8    Pr >= |M|   <.0001
+                                    Signed Rank    S  1.051E17    Pr >= |S|   <.0001
+
+
+                                               Quantiles (Definition 5)
+ 
+                                               Quantile         Estimate
+
+                                               100% Max       124948.129
+                                               99%             12921.436
+                                               95%              5229.369
+                                               90%              3292.540
+                                               75% Q3           1811.178
+                                               50% Median       1166.120
+                                               25% Q1            861.116
+                                               10%               667.880
+                                               5%                541.405
+                                               1%                  0.000
+                                               0% Min              0.000
+
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124846   6.13E8
+                                             0    6.6E8         124847   6.16E8
+                                             0    6.6E8         124847    6.6E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023   7
+
+                                                The UNIVARIATE Procedure
+                   Variable:  EARN_AVG_MONTH_REAL  (Inflation Adjusted Monthly Earnings - 2015 Reais)
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124925   6.27E8
+                                             0    6.6E8         124948   6.47E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023   8
+
+                                                The UNIVARIATE Procedure
+                     Variable:  EARN_DEC_REAL  (Inflation Adjusted December Earnings - 2015 Reais)
+
+                                                        Moments
+
+                            N                   660172301    Sum Weights          660172301
+                            Mean               1439.64406    Sum Observations    9.50413E11
+                            Std Deviation      2801.67245    Variance            7849368.53
+                            Skewness            9.4177685    Kurtosis            171.998685
+                            Uncorrected SS     6.55019E15    Corrected SS        5.18194E15
+                            Coeff Variation    194.608691    Std Error Mean      0.10904072
+
+
+                                               Basic Statistical Measures
+ 
+                                     Location                    Variability
+
+                                 Mean     1439.644     Std Deviation               2802
+                                 Median    933.240     Variance                 7849369
+                                 Mode        0.000     Range                     124953
+                                                       Interquartile Range         1600
+
+
+                                               Tests for Location: Mu0=0
+ 
+                                    Test           -Statistic-    -----p Value------
+
+                                    Student's t    t  13202.81    Pr > |t|    <.0001
+                                    Sign           M  2.2015E8    Pr >= |M|   <.0001
+                                    Signed Rank    S  4.847E16    Pr >= |S|   <.0001
+
+
+                                                Quantiles (Definition 5)
+ 
+                                                Quantile        Estimate
+
+                                                100% Max       124953.07
+                                                99%             12487.03
+                                                95%              4862.41
+                                                90%              3018.61
+                                                75% Q3           1600.19
+                                                50% Median        933.24
+                                                25% Q1              0.00
+                                                10%                 0.00
+                                                5%                  0.00
+                                                1%                  0.00
+                                                0% Min              0.00
+
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124821   6.12E8
+                                             0    6.6E8         124828   6.18E8
+                                             0    6.6E8         124832    6.3E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023   9
+
+                                                The UNIVARIATE Procedure
+                     Variable:  EARN_DEC_REAL  (Inflation Adjusted December Earnings - 2015 Reais)
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124885   6.48E8
+                                             0    6.6E8         124953   6.52E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023  10
 
                                                  The CONTENTS Procedure
 
-         Data Set Name        DBOUT.RAIS_DATA_EXTRACT                                  Observations          0 
-         Member Type          DATA                                                     Variables             3 
-         Engine               V9                                                       Indexes               0 
-         Created              01/16/2023 18:40:40                                      Observation Length    24
-         Last Modified        01/16/2023 18:40:40                                      Deleted Observations  0 
-         Protection                                                                    Compressed            NO
-         Data Set Type                                                                 Sorted                NO
-         Label                                                                                                 
-         Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                            
-         Encoding             latin1  Western (ISO)                                                            
+     Data Set Name        DBOUT.RAIS_DATA_EXTRACT                                  Observations          660172301
+     Member Type          DATA                                                     Variables             28       
+     Engine               V9                                                       Indexes               0        
+     Created              01/16/2023 19:59:16                                      Observation Length    176      
+     Last Modified        01/16/2023 19:59:16                                      Deleted Observations  0        
+     Protection                                                                    Compressed            NO       
+     Data Set Type                                                                 Sorted                NO       
+     Label                                                                                                        
+     Data Representation  SOLARIS_X86_64, LINUX_X86_64, ALPHA_TRU64, LINUX_IA64                                   
+     Encoding             latin1  Western (ISO)                                                                   
 
 
                                            Engine/Host Dependent Information
 
              Data Set Page Size          65536                                                             
-             Number of Data Set Pages    1                                                                 
+             Number of Data Set Pages    1779441                                                           
              First Data Page             1                                                                 
-             Max Obs per Page            2714                                                              
-             Obs in First Data Page      0                                                                 
+             Max Obs per Page            371                                                               
+             Obs in First Data Page      335                                                               
              Number of Data Set Repairs  0                                                                 
              Filename                    /work/imslab/WageGaps_Analysis/data/out/rais_data_extract.sas7bdat
              Release Created             9.0401M0                                                          
@@ -147,13 +369,400 @@
              Inode Number                1.441203E17                                                       
              Access Permission           rw-rw----                                                         
              Owner Name                  schmutte                                                          
-             File Size (bytes)           131072                                                            
+             File Size (bytes)           116617510912                                                      
 
 
                                        Alphabetic List of Variables and Attributes
  
-     #    Variable     Type    Len    Format    Informat    Label
+  # Variable             Type Len Format     Informat Label
 
-     1    PIS          Char     11              $11.        Worker PIS code                                        
-     3    educ_best    Num       8                          Maximum education observed for this PIS up to this year
-     2    year         Char      4    $4.                   sample year                                            
+  9 CAUSE_OF_SEP         Char   2            $2.      Reason for contract termination                                  
+  6 CNAE20_CLASS         Char   5 $5.        $5.      Industry class (5 digit) according to CNAE 2.0                   
+ 10 CONTRACT_TYPE        Char   2            $2.      Type of employment contract                                      
+ 16 DAY_OF_SEP           Char   2            $2.      Contract end date: day                                           
+ 21 EARN_AVG_MONTH_REAL  Num    8                     Inflation Adjusted Monthly Earnings - 2015 Reais                 
+ 22 EARN_DEC_REAL        Num    8                     Inflation Adjusted December Earnings - 2015 Reais                
+  7 ESTAB_SIZE_DEC31     Char   2            $2.      Estab. size category: contracts active on Dec. 31                
+ 17 GENDER               Char   1                                                                                      
+ 13 HIRE_DATE            Num    8 DDMMYYS10. DDMMYY8. Date of contract initiation                                      
+ 11 MONTH_OF_SEP         Char   2            $2.      Month of contract termination                                    
+  8 MUNI                 Char   6            $6.      Establishment Municipality                                       
+ 15 NUM_HOURS_CONTRACTED Num    8            COMMA2.  Number of weekly hours contracted                                
+ 19 OCCUP_CBO2002        Char   6            $6.      Occupation classification per CBO 2002                           
+  1 PIS                  Char  11            $11.     Worker PIS code                                                  
+  4 PLANT_ID             Char  14            $14.     Plant identifier (either CNPJ or CEI)                            
+ 12 RACE                 Char   2            $2.      Worker race (pre-2006 classifications)                           
+ 14 TENURE_MONTHS        Num    8            NUMX6.   Tenure in contract (in months)                                   
+ 18 TYPE_OF_HIRE         Char   2            $2.      Type of contract initiation                                      
+ 20 age_31Dec            Num    8                     Age on Dec. 31 based on modal date of birth reported for this PIS
+ 28 educ_best            Num    8                     Maximum education observed for this PIS up to this year          
+ 23 male                 Num    8                     Employer reported gender is male                                 
+  3 male_mode            Num    8                     Modal value of male indicator across all jobs                    
+  2 race_mode            Num    8                     Modal race across all jobs                                       
+                                                     The SAS System                   18:49 Monday, January 16, 2023  11
+
+                                                 The CONTENTS Procedure
+
+                                       Alphabetic List of Variables and Attributes
+ 
+  # Variable             Type Len Format     Informat Label
+
+ 27 race_other           Num    8                     Employer reported some other race or race missing                
+ 25 race_pardo           Num    8                     Employer reported race is pardo                                  
+ 26 race_preto           Num    8                     Employer reported race is preto                                  
+ 24 race_white           Num    8                     Employer reported race is white                                  
+  5 year                 Char   4 $4.                 sample year                                                      
+                                                     The SAS System                   18:49 Monday, January 16, 2023  12
+
+                                                The UNIVARIATE Procedure
+                   Variable:  EARN_AVG_MONTH_REAL  (Inflation Adjusted Monthly Earnings - 2015 Reais)
+
+                                                        Moments
+
+                            N                   660172301    Sum Weights          660172301
+                            Mean               1851.28489    Sum Observations    1.22217E12
+                            Std Deviation      2728.23509    Variance            7443266.73
+                            Skewness           9.34574434    Kurtosis            161.561884
+                            Uncorrected SS     7.17642E15    Corrected SS        4.91384E15
+                            Coeff Variation    147.369814    Std Error Mean      0.10618255
+
+
+                                               Basic Statistical Measures
+ 
+                                     Location                    Variability
+
+                                 Mean     1851.285     Std Deviation               2728
+                                 Median   1166.120     Variance                 7443267
+                                 Mode        0.000     Range                     124948
+                                                       Interquartile Range    950.06205
+
+
+                                               Tests for Location: Mu0=0
+ 
+                                    Test           -Statistic-    -----p Value------
+
+                                    Student's t    t  17434.93    Pr > |t|    <.0001
+                                    Sign           M  3.2423E8    Pr >= |M|   <.0001
+                                    Signed Rank    S  1.051E17    Pr >= |S|   <.0001
+
+
+                                               Quantiles (Definition 5)
+ 
+                                               Quantile         Estimate
+
+                                               100% Max       124948.129
+                                               99%             12921.436
+                                               95%              5229.369
+                                               90%              3292.540
+                                               75% Q3           1811.178
+                                               50% Median       1166.120
+                                               25% Q1            861.116
+                                               10%               667.880
+                                               5%                541.405
+                                               1%                  0.000
+                                               0% Min              0.000
+
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124846   8.94E7
+                                             0    6.6E8         124847   1.36E8
+                                             0    6.6E8         124847   1.36E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023  13
+
+                                                The UNIVARIATE Procedure
+                   Variable:  EARN_AVG_MONTH_REAL  (Inflation Adjusted Monthly Earnings - 2015 Reais)
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124925   3.28E8
+                                             0    6.6E8         124948    5.5E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023  14
+
+                                                The UNIVARIATE Procedure
+                     Variable:  EARN_DEC_REAL  (Inflation Adjusted December Earnings - 2015 Reais)
+
+                                                        Moments
+
+                            N                   660172301    Sum Weights          660172301
+                            Mean               1439.64406    Sum Observations    9.50413E11
+                            Std Deviation      2801.67245    Variance            7849368.53
+                            Skewness            9.4177685    Kurtosis            171.998685
+                            Uncorrected SS     6.55019E15    Corrected SS        5.18194E15
+                            Coeff Variation    194.608691    Std Error Mean      0.10904072
+
+
+                                               Basic Statistical Measures
+ 
+                                     Location                    Variability
+
+                                 Mean     1439.644     Std Deviation               2802
+                                 Median    933.240     Variance                 7849369
+                                 Mode        0.000     Range                     124953
+                                                       Interquartile Range         1600
+
+
+                                               Tests for Location: Mu0=0
+ 
+                                    Test           -Statistic-    -----p Value------
+
+                                    Student's t    t  13202.81    Pr > |t|    <.0001
+                                    Sign           M  2.2015E8    Pr >= |M|   <.0001
+                                    Signed Rank    S  4.847E16    Pr >= |S|   <.0001
+
+
+                                                Quantiles (Definition 5)
+ 
+                                                Quantile        Estimate
+
+                                                100% Max       124953.07
+                                                99%             12487.03
+                                                95%              4862.41
+                                                90%              3018.61
+                                                75% Q3           1600.19
+                                                50% Median        933.24
+                                                25% Q1              0.00
+                                                10%                 0.00
+                                                5%                  0.00
+                                                1%                  0.00
+                                                0% Min              0.00
+
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124821   6.23E7
+                                             0    6.6E8         124828    1.8E8
+                                             0    6.6E8         124832   3.77E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023  15
+
+                                                The UNIVARIATE Procedure
+                     Variable:  EARN_DEC_REAL  (Inflation Adjusted December Earnings - 2015 Reais)
+
+                                                  Extreme Observations
+ 
+                                         ----Lowest----        -----Highest----
+ 
+                                         Value      Obs          Value      Obs
+
+                                             0    6.6E8         124885   5.64E8
+                                             0    6.6E8         124953      6E8
+                                                     The SAS System                   18:49 Monday, January 16, 2023  16
+
+                                                  The MEANS Procedure
+
+sample
+year        N Obs  Variable   Label                                                                      N          Mean
+------------------------------------------------------------------------------------------------------------------------
+2003     30886208  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   30865818    32.8061577
+                   educ_best  Maximum education observed for this PIS up to this year             30886208     5.7413509
+
+2004     32889173  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   32877192    32.7571818
+                   educ_best  Maximum education observed for this PIS up to this year             32889173     5.9455035
+
+2005     35484272  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   35474491    32.7950261
+                   educ_best  Maximum education observed for this PIS up to this year             35484272     6.1212613
+
+2006     37816071  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   37808055    32.9062601
+                   educ_best  Maximum education observed for this PIS up to this year             37816071     6.2638274
+
+2007     41149937  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   41141567    32.9031459
+                   educ_best  Maximum education observed for this PIS up to this year             41149937     6.3802005
+
+2008     45431626  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   45422879    32.9098159
+                   educ_best  Maximum education observed for this PIS up to this year             45431626     6.4883846
+
+2009     46677820  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   46669725    33.1938450
+                   educ_best  Maximum education observed for this PIS up to this year             46677820     6.5868029
+
+2010     51380876  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   51370849    33.1310764
+                   educ_best  Maximum education observed for this PIS up to this year             51380876     6.6779008
+
+2012     57710519  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   57699382    33.4118671
+                   educ_best  Maximum education observed for this PIS up to this year             57710519     6.8265685
+
+2013     59454563  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   59443521    33.6421656
+                   educ_best  Maximum education observed for this PIS up to this year             59454563     6.8934804
+
+2014     60249562  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   60238762    33.9101981
+                   educ_best  Maximum education observed for this PIS up to this year             60249562     6.9672841
+
+2015     57090691  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   57082492    34.4986115
+                   educ_best  Maximum education observed for this PIS up to this year             57090691     7.0299491
+
+2016     52700532  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   52692463    35.1135608
+                   educ_best  Maximum education observed for this PIS up to this year             52700532     7.1011399
+
+2017     51250451  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   51238474    35.4099051
+                   educ_best  Maximum education observed for this PIS up to this year             51250451     7.1591873
+------------------------------------------------------------------------------------------------------------------------
+
+     sample
+     year        N Obs  Variable   Label                                                                   Std Dev
+     -------------------------------------------------------------------------------------------------------------
+     2003     30886208  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.5239243
+                        educ_best  Maximum education observed for this PIS up to this year               1.9328170
+
+     2004     32889173  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.5306845
+                        educ_best  Maximum education observed for this PIS up to this year               1.8611984
+     -------------------------------------------------------------------------------------------------------------
+                                                     The SAS System                   18:49 Monday, January 16, 2023  17
+
+                                                  The MEANS Procedure
+
+     sample
+     year        N Obs  Variable   Label                                                                   Std Dev
+     -------------------------------------------------------------------------------------------------------------
+     2005     35484272  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.5646801
+                        educ_best  Maximum education observed for this PIS up to this year               1.7932641
+
+     2006     37816071  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.6054708
+                        educ_best  Maximum education observed for this PIS up to this year               1.7344024
+
+     2007     41149937  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.6522730
+                        educ_best  Maximum education observed for this PIS up to this year               1.6738867
+
+     2008     45431626  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.7077009
+                        educ_best  Maximum education observed for this PIS up to this year               1.6117552
+
+     2009     46677820  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.7815423
+                        educ_best  Maximum education observed for this PIS up to this year               1.5633971
+
+     2010     51380876  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.8198663
+                        educ_best  Maximum education observed for this PIS up to this year               1.5028959
+
+     2012     57710519  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.0322760
+                        educ_best  Maximum education observed for this PIS up to this year               1.4073210
+
+     2013     59454563  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.1384494
+                        educ_best  Maximum education observed for this PIS up to this year               1.3701265
+
+     2014     60249562  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.2423526
+                        educ_best  Maximum education observed for this PIS up to this year               1.3365069
+
+     2015     57090691  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.3291897
+                        educ_best  Maximum education observed for this PIS up to this year               1.3151263
+
+     2016     52700532  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.3612058
+                        educ_best  Maximum education observed for this PIS up to this year               1.3012276
+
+     2017     51250451  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    11.3711897
+                        educ_best  Maximum education observed for this PIS up to this year               1.2792854
+     -------------------------------------------------------------------------------------------------------------
+
+     sample
+     year        N Obs  Variable   Label                                                                   Minimum
+     -------------------------------------------------------------------------------------------------------------
+     2003     30886208  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     1.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2004     32889173  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     2.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2005     35484272  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     3.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2006     37816071  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     4.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+     -------------------------------------------------------------------------------------------------------------
+                                                     The SAS System                   18:49 Monday, January 16, 2023  18
+
+                                                  The MEANS Procedure
+
+     sample
+     year        N Obs  Variable   Label                                                                   Minimum
+     -------------------------------------------------------------------------------------------------------------
+     2007     41149937  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     6.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2008     45431626  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     7.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2009     46677820  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS     9.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2010     51380876  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS    10.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2012     57710519  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2013     59454563  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2014     60249562  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2015     57090691  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2016     52700532  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+
+     2017     51250451  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS             0
+                        educ_best  Maximum education observed for this PIS up to this year               1.0000000
+     -------------------------------------------------------------------------------------------------------------
+
+     sample
+     year        N Obs  Variable   Label                                                                   Maximum
+     -------------------------------------------------------------------------------------------------------------
+     2003     30886208  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   102.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2004     32889173  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   103.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2005     35484272  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   104.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2006     37816071  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   105.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2007     41149937  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   106.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2008     45431626  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   107.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+     -------------------------------------------------------------------------------------------------------------
+                                                     The SAS System                   18:49 Monday, January 16, 2023  19
+
+                                                  The MEANS Procedure
+
+     sample
+     year        N Obs  Variable   Label                                                                   Maximum
+     -------------------------------------------------------------------------------------------------------------
+     2009     46677820  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   108.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2010     51380876  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   109.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2012     57710519  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   111.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2013     59454563  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   112.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2014     60249562  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   113.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2015     57090691  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   114.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2016     52700532  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   115.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+
+     2017     51250451  age_31Dec  Age on Dec. 31 based on modal date of birth reported for this PIS   116.0000000
+                        educ_best  Maximum education observed for this PIS up to this year               9.0000000
+     -------------------------------------------------------------------------------------------------------------

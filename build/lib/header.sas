@@ -6,7 +6,7 @@
 *%let idx_path = /data/CleanData/RAIS/v2019March;
 
 /*externals*/
-%let external_path = &trunk./external;
+%let external_path = &trunk./build/external;
 
 /*working path*/
 %let wrk_path = &trunk./data/interwrk;

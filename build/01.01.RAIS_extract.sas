@@ -86,7 +86,7 @@ data INTERWRK.select_jobs(keep= PIS year PLANT_ID
 			b=1;
 		end;
 		if 0 then set INTERWRK.selected_workers 
-					  fastwrk2.irais_plantstack;
+					  INTERWRK.irais_plantstack;
          	
          	declare hash pltchars(dataset: 'INTERWRK.irais_plantstack',
          							ordered: 'no');
